@@ -102,6 +102,7 @@
                     </div>
                     <a class="transition addcart text-decoration-none addnow" data-id="{{ $rowDetail['id'] }}"
                         data-action="addnow">{{ __('web.themvaogiohang') }}</a>
+                      
                 </div>
                 <div class="cart-pro-detail">
                     <a class="transition flex-1 addcart text-decoration-none buynow" data-id="{{ $rowDetail['id'] }}"

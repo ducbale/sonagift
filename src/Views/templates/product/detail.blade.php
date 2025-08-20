@@ -126,10 +126,18 @@
                         <a class="transition addcart text-decoration-none addnow" data-id="{{ $rowDetail['id'] }}"
                             data-action="addnow">{{ __('web.themvaogiohang') }}</a>
                     </div>
-                    <div class="cart-pro-detail">
+                    <div class="cart-pro-detail flex gap-3">
                         <a class="transition flex-1 addcart text-decoration-none buynow" data-id="{{ $rowDetail['id'] }}"
                             data-action="buynow">
                             <span>{{ __('web.muangay') }}</span>
+                        </a>
+                        <a class="transition flex-1 addcart text-decoration-none buynow"
+                            id="chatzalo"
+                            href="https://zalo.me/{{ preg_replace('/[^0-9]/', '', $optSetting['zalo']) }}"
+                            target="_blank"
+                            rel="noopener"
+                            data-action="contact">
+                            <span>Liên hệ nhận giá sỉ</span>
                         </a>
                     </div>
                     @endif
