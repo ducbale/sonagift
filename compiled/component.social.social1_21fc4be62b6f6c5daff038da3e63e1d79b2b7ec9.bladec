@@ -1,0 +1,51 @@
+<?php if(device() == 'mobile'): ?>
+ <?php 
+ $bottom = $val['mobile']['bottom'] ?? '';
+ $left = !empty($val['mobile']['left']) ? $val['mobile']['left'] . 'px' : '';
+ $right = !empty($val['mobile']['right']) ? $val['mobile']['right'] . 'px' : '';
+ ?>
+<?php else: ?>
+ <?php 
+ $bottom = $val['destop']['bottom'] ?? '';
+ $left = !empty($val['destop']['left']) ? $val['destop']['left'] . 'px' : '';
+ $right = !empty($val['destop']['right']) ? $val['destop']['right'] . 'px' : '';
+ ?>
+<?php endif; ?>
+
+<?php 
+ $background = $val['background'] ?? '';
+ $backgroundText = $val['background-text'] ?? '';
+ $color = $val['color'] ?? '';
+ $location = !empty($left) ? 'left' : 'right';
+ $destop = !empty($val['destop']['device']) && device() == 'destop' ? true : false;
+ $mobile = !empty($val['mobile']['device']) && device() == 'mobile' ? true : false;
+ ?>
+
+<?php if(!empty($destop) || !empty($mobile)): ?>
+ <div id="social"
+ style="
+ --background: #<?php echo \htmlentities($background??'', ENT_QUOTES, 'UTF-8', false); ?>;
+ --bottom: <?php echo \htmlentities($bottom??'', ENT_QUOTES, 'UTF-8', false); ?>px;
+ --left: <?php echo \htmlentities($left??'', ENT_QUOTES, 'UTF-8', false); ?>;
+ --right: <?php echo \htmlentities($right??'', ENT_QUOTES, 'UTF-8', false); ?>;
+">
+ <?php $__currentLoopData = $mxh; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $mxh): $loop = $this->incrementLoopIndices();  ?>
+ <a class="btn-phone btn-frame text-decoration-none" href="<?php echo \htmlentities($mxh['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="animated infinite zoomIn kenit-alo-circle"></div>
+ <div class="animated infinite pulse kenit-alo-circle-fill"></div>
+ <i><img onerror="this.src='assets/images/noimage.png';" src="<?php echo \htmlentities(upload('photo', $mxh['photo'])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($mxh['namevi']??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($mxh['namevi']??'', ENT_QUOTES, 'UTF-8', false); ?>" width="35" /></i>
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php $this->startPush('styles'); ?>
+ <link href="assets/css/social.css" rel="stylesheet">
+ <?php $this->stopPush(); ?>
+
+ <?php $this->startPush('scripts'); ?>
+ <script type="text/javascript">
+ $('#social').show(500);
+ </script>
+ <?php $this->stopPush(); ?>
+<?php endif; ?>

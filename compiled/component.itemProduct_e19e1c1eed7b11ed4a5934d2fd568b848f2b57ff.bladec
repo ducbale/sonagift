@@ -1,0 +1,69 @@
+<div class="product" >
+ <?php 
+ $flagPro = Func::status($product['status'],'hot');
+ $flagPro1 = Func::status($product['status'],'sale');
+ $flagPro2 = Func::status($product['status'],'stock');
+ ?>
+ <?php if($flagPro==true): ?>                        
+ <span class="check-hot">Hot</span>
+ <?php endif; ?>
+ <?php if($flagPro1==true): ?>                        
+ <span class="check-sale">Sale</span>
+ <?php endif; ?>
+ <?php if($flagPro2==true): ?>  
+ <span class="soldout">sold out</span>
+ <?php endif; ?>
+ <div class="pic-product">
+ <a class="img block" href="<?php echo \htmlentities(url('slugweb', ['slug' => $product['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($product['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class=" <?php if($product['photo2']): ?> pic1 <?php endif; ?>"> 
+ <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$product['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ data-src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$product['type'].'.images.photo.thumb'), $product['photo'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($product['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ 
+ <?php if($product['photo2']): ?>
+ <div class="pic2">
+ <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$product['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ data-src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$product['type'].'.images.photo.thumb'), $product['photo2'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($product['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php endif; ?>
+ </a>
+ <?php if($flagPro2==false && !empty($product->regular_price)): ?>
+ <a class="transition addcart text-decoration-none addnow"  data-id="<?php echo \htmlentities($product['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-action="addnow"><?php echo \htmlentities(__('web.themvaogiohang')??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </a>
+ <?php else: ?>
+ <a class="transition addcart text-decoration-none " href="<?php echo \htmlentities(url('slugweb', ['slug' => $product['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($product['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities(__('web.xemchitiet')??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </a>
+ <?php endif; ?>
+ <input class="hidden qty-pro" value="1">
+ <div class="button-in quickshop">
+ <div class="quickshop-1" data-fancybox="quick-view" data-type="ajax" data-src="<?php echo \htmlentities(url('load-quickview') .'?id='.$product['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"  data-id="<?php echo \htmlentities($product['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" data-url="<?php echo \htmlentities(url('load-quickview')??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <span class="ts-tooltip button-tooltip">Quick view</span>
+ <i class="fas fa-search"></i>
+ </div>
+ </div>
+ <div class="show-quickview"></div>
+ </div>
+ <div class="info-product">
+ <h3 class="name-product">
+ <a class="text-split text-decoration-none" href="<?php echo \htmlentities(url('slugweb', ['slug' => $product['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($product['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($product['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ <div class="price-product">
+ <?php if(empty($product->sale_price)): ?>
+ <?php if(empty($product->regular_price)): ?>
+ <a href="<?php echo \htmlentities(url('lien-he')??'', ENT_QUOTES, 'UTF-8', false); ?>" target="_blank" class="price-new"><?php echo \htmlentities(__('web.lienhe')??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ <?php else: ?>
+ <span class="price-new"><?php echo \htmlentities(Func::formatMoney($product->regular_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <?php endif; ?>
+ <?php else: ?>
+ <span class="price-new"><?php echo \htmlentities(Func::formatMoney($product->sale_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <span class="price-old"><?php echo \htmlentities(Func::formatMoney($product->regular_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ 
+ <?php endif; ?>
+ </div>
+ </div>
+</div>

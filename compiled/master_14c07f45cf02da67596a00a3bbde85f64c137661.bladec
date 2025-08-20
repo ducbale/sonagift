@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi">
+ <head>
+ <?php echo $this->runChild('layout.head'); ?>
+ <?php echo $this->runChild('layout.css'); ?>
+ </head>
+ <body ondragstart="return false;" ondrop="return false;">
+ <?php echo $this->yieldContent('contentmaster'); ?>
+ <?php echo $this->runChild('layout.js'); ?>
+ </body>
+</html>

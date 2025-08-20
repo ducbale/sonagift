@@ -1,0 +1,59 @@
+<?php if($paginator->hasPages()): ?>
+ <nav class="d-flex justify-items-center justify-content-between">
+
+ <div class="flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-center">
+ <div>
+ <ul class="pagination">
+ <li class="page-item disabled" aria-disabled="true">
+ <span class="page-link" aria-hidden="true">Page <?php echo \htmlentities($paginator->currentPage()??'', ENT_QUOTES, 'UTF-8', false); ?>/<?php echo \htmlentities($paginator->lastPage()??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </li>
+ <?php /* Previous Page Link */ ?>
+ <?php if($paginator->onFirstPage()): ?>
+ <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+ <span class="page-link" aria-hidden="true">First</span>
+ </li>
+ <?php else: ?>
+ 
+ <li class="page-item">
+ <a class="page-link" href="<?php echo \htmlentities($paginator->url(1)??'', ENT_QUOTES, 'UTF-8', false); ?>" rel="prev">First</a>
+ </li>
+ <li class="page-item">
+ <a class="page-link" href="<?php echo \htmlentities($paginator->previousPageUrl()??'', ENT_QUOTES, 'UTF-8', false); ?>" rel="prev" aria-label="@lang('pagination.previous')">Prev</a>
+ </li>
+ <?php endif; ?>
+
+ <?php /* Pagination Elements */ ?>
+ <?php $__currentLoopData = $elements; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $element): $loop = $this->incrementLoopIndices();  ?>
+ <?php /* "Three Dots" Separator */ ?>
+ <?php if(is_string($element)): ?>
+ <li class="page-item disabled" aria-disabled="true"><span class="page-link"><?php echo \htmlentities($element??'', ENT_QUOTES, 'UTF-8', false); ?></span></li>
+ <?php endif; ?>
+
+ <?php /* Array Of Links */ ?>
+ <?php if(is_array($element)): ?>
+ <?php $__currentLoopData = $element; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $page => $url): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($page == $paginator->currentPage()): ?>
+ <li class="page-item active" aria-current="page"><span class="page-link"><?php echo \htmlentities($page??'', ENT_QUOTES, 'UTF-8', false); ?></span></li>
+ <?php else: ?>
+ <li class="page-item"><a class="page-link" href="<?php echo \htmlentities($url??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($page??'', ENT_QUOTES, 'UTF-8', false); ?></a></li>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+ <?php /* Next Page Link */ ?>
+ <?php if($paginator->hasMorePages()): ?>
+ <li class="page-item">
+ <a class="page-link" href="<?php echo \htmlentities($paginator->nextPageUrl()??'', ENT_QUOTES, 'UTF-8', false); ?>" rel="next" aria-label="@lang('pagination.next')">Next</a>
+ </li>
+ <li class="page-item">
+ <a class="page-link" href="<?php echo \htmlentities($paginator->url($paginator->lastPage())??'', ENT_QUOTES, 'UTF-8', false); ?>" rel="next" >Last</a>
+ </li>
+ <?php endif; ?>
+ </ul>
+ </div>
+ </div>
+ </nav>
+<?php endif; ?>

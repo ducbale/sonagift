@@ -1,0 +1,5 @@
+<div class="breadCrumbs">
+ <div class="max-width">
+ <div class="wrap-content"><?php echo BreadCrumbs::get(); ?></div>
+ </div>
+</div>

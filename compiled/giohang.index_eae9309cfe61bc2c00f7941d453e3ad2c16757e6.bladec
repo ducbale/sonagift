@@ -1,0 +1,187 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<div class="max-width py-3">
+ <div class="wrap-content padding-top-bottom">
+ <form class="form-cart"  method="post" action="cart/send-to-cart" enctype="multipart/form-data">
+ <div class="wrap-cart flex items-stretch justify-between">
+ <?php if(Cart::count() > 0): ?>
+ <div class="top-cart">
+ <p class="title-cart"><?php echo \htmlentities(__('web.giohangcuaban')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <div class="list-procart">
+ <div class="procart procart-label d-flex align-items-start justify-content-between">
+ <div class="pic-procart "><?php echo \htmlentities(__('web.hinhanh')??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="info-procart "><?php echo \htmlentities(__('web.tensanpham')??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="quantity-procart ">
+ <p><?php echo \htmlentities(__('web.soluong')??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <p><?php echo \htmlentities(__('web.thanhtien')??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <div class="price-procart "><?php echo \htmlentities(__('web.tongtien')??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+ <?php $__currentLoopData = Cart::content(); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php 
+ $color = $v->options->color ?? '';
+ $size = $v->options->size ?? '';
+ $code = $v->options->code ?? '';
+ $photo = $v->options->photo ?? '';
+ $proInfo = $v->options->itemProduct;
+ 
+ $pro_price =$proInfo->regular_price;
+ $pro_price_new =$proInfo->sale_price;
+ $pro_price_qty = $pro_price * $v->qty;
+ $pro_price_new_qty = $pro_price_new * $v->qty;
+ ?>
+
+ <div class="procart flex items-start justify-between procart-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="pic-procart">
+ <a class="text-decoration-none" href="<?php echo \htmlentities(url('slugweb',['slug'=>$proInfo->slugvi])??'', ENT_QUOTES, 'UTF-8', false); ?>" target="_blank" title="<?php echo \htmlentities($proInfo->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img src="<?php echo \htmlentities($photo??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($proInfo->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+ </a>
+ <a class="del-procart text-decoration-none" data-rowId="<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <i class="fa fa-times-circle"></i>
+ <span><?php echo \htmlentities(__('web.xoa')??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </a>
+ </div>
+ <div class="info-procart">
+ <h3 class="name-procart"><a class="text-decoration-none" href="<?php echo \htmlentities(url('slugweb',['slug'=>$proInfo->slugvi])??'', ENT_QUOTES, 'UTF-8', false); ?>" target="_blank" title="<?php echo \htmlentities($proInfo->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($proInfo->namevi??'', ENT_QUOTES, 'UTF-8', false); ?></a></h3>
+ <?php if(!empty($v->options->properties->toArray())): ?>
+ <div class="properties-procart">
+ <span>Mẫu bánh:</span>
+ <?php $__currentLoopData = $v->options->properties; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $kp => $vp): $loop = $this->incrementLoopIndices();  ?>
+ <p><?php echo \htmlentities($vp->namevi??'', ENT_QUOTES, 'UTF-8', false); ?></p> <br/>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php endif; ?>
+ </div>
+ <div class="quantity-procart">
+ <div class="price-procart price-procart-rp">
+ <?php if(!empty($proInfo->sale_price)): ?>
+ <p class="price-new-cart load-price-new-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo Func::formatMoney((float)$pro_price_new_qty); ?></p>
+ <p class="price-old-cart load-price-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo Func::formatMoney((float)$pro_price_qty); ?></p>
+ <?php else: ?>
+ <p class="price-new-cart load-price-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>>"><?php echo Func::formatMoney((float)$pro_price_qty); ?></p>
+ <?php endif; ?>
+ </div>
+ <div class="quantity-counter-procart quantity-counter-procart-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?> flex items-stretch justify-between">
+ <span class="counter-procart-minus counter-procart">-</span>
+ <input type="text" readonly class="quantity-procat" min="1" value="<?php echo \htmlentities($v->qty??'', ENT_QUOTES, 'UTF-8', false); ?>"  data-pid="<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>" data-rowId="<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+ <span  class="counter-procart-plus counter-procart">+</span>
+ </div>
+ 
+ </div>
+ <div class="price-procart">
+ <?php if(!empty($proInfo->sale_price)): ?>
+ <p class="price-new-cart load-price-new-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo Func::formatMoney((float)$pro_price_new_qty); ?></p>
+ <p class="price-old-cart load-price-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo Func::formatMoney((float)$pro_price_qty); ?></p>
+ <?php else: ?>
+ <p class="price-new-cart load-price-<?php echo \htmlentities($v->rowId??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo Func::formatMoney((float)$pro_price_qty); ?></p>
+ <?php endif; ?>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <div class="money-procart">
+ <?php if(!empty(config('type.order.don-hang.ship'))): ?>
+ <div class="total-procart flex items-center justify-between">
+ <p><?php echo \htmlentities(__('web.tamtinh')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <p class="load-price-sub"><?php echo Func::formatMoney(Cart::subtotalFloat()); ?></p>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty(config('type.order.don-hang.ship'))): ?>
+ <div class="total-procart flex items-center justify-between">
+ <p><?php echo \htmlentities(__('web.phivanchuyen')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <p class="load-price-ship">30.000đ</p>
+ </div>
+ <?php endif; ?>
+ <div class="total-procart flex items-center justify-between">
+ <p><?php echo \htmlentities(__('web.tongtien')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <p class="total-price load-price-total"><?php echo Func::formatMoney(Cart::priceTotalFloat()); ?></p>
+ </div>
+ </div>
+ </div>
+ <div class="bottom-cart">
+ <div class="section-cart">
+ <p class="title-cart"><?php echo \htmlentities(__('web.hinhthucthanhtoan')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <div class="information-cart">
+ <?php $__currentLoopData = $httt; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="payments-cart form-check" >
+ <input type="radio" class="form-check-input" id="payments-<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>" name="dataOrder[payments]" value="<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>" required>
+ <label class="payments-label form-check-label"   for="payments-<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>" data-payments="<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?></label>
+ <div class="payments-info payments-info-<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?> transition"><?php echo nl2br($v->descvi); ?></div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <p class="title-cart"><?php echo \htmlentities(__('web.thongtingiohang')??'', ENT_QUOTES, 'UTF-8', false); ?>:</p>
+ <div class="information-cart !mb-[10px]">
+ <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-[10px]">
+ <div class="input-cart">
+ <div class="input-cart">
+ <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="<?php echo \htmlentities(__('web.hoten')??'', ENT_QUOTES, 'UTF-8', false); ?>" value="" required />
+ </div>
+ <div class="invalid-feedback"><?php echo \htmlentities(__('web.vuilongnhaphoten')??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+ <div class="input-cart">
+ <div class="input-cart">
+ <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Điện thoại" value="" required />
+ </div>
+ <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+ </div>
+ </div>
+ <div class="input-cart">
+ <div class="input-cart">
+ <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="" required />
+ </div>
+ <div class="invalid-feedback">Vui lòng nhập email</div>
+ </div>
+ <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-[10px]">
+ <div class="input-cart">
+ <select  class="select-city-cart form-select form-control text-sm" required id="city" name="dataOrder[city]">
+ <option value="">Tỉnh thành</option>
+ <?php $__currentLoopData = $city??[]; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($v->id??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?></option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ <div class="invalid-feedback">Vui lòng chọn tỉnh thành</div>
+ </div>
+ <div class="input-cart">
+ <select  class="select-district-cart select-district form-select form-control text-sm" required id="district" name="dataOrder[district]">
+ <option value="">Quận huyện</option>
+ 
+ </select>
+ <div class="invalid-feedback">Vui lòng chọn quận huyện</div>
+ </div>
+ <div class="input-cart">
+ <select class="select-ward-cart select-ward form-select form-control text-sm" required id="ward" name="dataOrder[ward]">
+ <option value="">Phường xã</option>
+ 
+ </select>
+ <div class="invalid-feedback">Vui lòng chọn phường xã</div>
+ </div>
+ </div>
+ <div class="input-cart">
+ <div class="input-cart">
+ <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="" required />
+ </div>
+ <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
+ </div>
+ <div class="input-cart">
+ <div class="input-cart">
+ <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Yêu cầu khác"></textarea>
+ </div>
+ </div>
+ </div>
+ <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán"  />
+ </div>
+ </div>
+ <?php else: ?>
+ <div>Bạn chưa có sản phẩm trong giỏ hàng !</div>
+ <?php endif; ?>
+ </div>
+ </form>
+ </div>
+</div>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

@@ -1,0 +1,69 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('content'); ?>
+<div class="container-xxl flex-grow-1 container-p-y container-fluid">
+ <div class="app-ecommerce">
+ <form class="validation-form" novalidate method="post"
+ action="<?php echo \htmlentities(url('admin', ['com' => $com, 'act' => 'save', 'type' => $type], ['id' => $item['id'] ?? 0,'page'=>$page])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ enctype="multipart/form-data">
+ <?php  $this->startComponent('component.buttonAdd', ['params' => ['id_parent' => $id_parent]]); ?>
+ <?php echo $this->renderComponent(); ?>
+
+ <?php echo Flash::getMessages('admin'); ?>
+
+ <div class="row">
+ <div class="col-12 col-lg-8">
+
+ <div class="card mb-4">
+ <div class="card-header">
+ <h3 class="card-title">Thông tin <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </h3>
+ </div>
+ <div class="card-body card-article">
+ 
+ <div class="form-group mt-3">
+ <label class="form-label" for="content"><strong>Nội dung:</strong></label>
+ <p class="content-link-in"><?php echo $item['content']; ?></p>
+ </div>
+
+ <div class="form-group mt-3">
+ <label class="form-label" for="link"><strong>Link:</strong></label>
+ <input type="text" class="form-control for-seo text-sm" name="data[link]"
+ id="link" placeholder="Link"
+ value="<?php echo \htmlentities(!empty(Flash::has('link')) ? Flash::get('link') : $item['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+
+
+ </div>
+ </div>
+ </div>
+ <div class="col-12 col-lg-4">
+
+ <div class="card mb-4 form-group-category">
+ <div class="card-header">
+ <h5 class="card-title mb-0">Trạng thái</h5>
+ </div>
+ <div class="card-body ">
+ <div class="form-group">
+ <label class="form-label" for="id_list"><?php echo Func::decodeHtmlChars(Func::checkWebsiteStatus($item['link'])); ?></label>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+ <input type="hidden" name="data[type_link]"
+ value="<?= !empty($item['type_link']) && $item['type_link'] > 0 ? $item['type_link'] : '' ?>">
+ <input type="hidden" name="id"
+ value="<?= !empty($item['id']) && $item['id'] > 0 ? $item['id'] : '' ?>">
+ <input type="hidden" name="id_parent"
+ value="<?= !empty($item['id_parent']) && $item['id_parent'] > 0 ? $item['id_parent'] : '' ?>">
+ <input name="csrf_token" type="hidden" value="<?php echo \htmlentities(csrf_token()??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php  $this->startComponent('component.buttonAdd', ['params' => ['id_parent' => $id_parent]]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </form>
+ </div>
+</div>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

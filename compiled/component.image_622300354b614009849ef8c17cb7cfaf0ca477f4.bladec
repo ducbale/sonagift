@@ -1,0 +1,115 @@
+<div class="photoUpload-zone">
+ <div class="crop-view-popup d-block">
+ <div class="setting-crop">
+ <input type="hidden" name="additionalData" id="additionalData" value="someAdditionalData">
+ <ul class="mb-3 hide-crop">
+ <li>
+ <button id="cropButton-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>" type="button"
+ class="cropButton btn-primary btn-crop-img"><i class="ti ti-crop"></i> Cắt ảnh</button>
+ </li>
+ </ul>
+ <div class="actions mb-3 mt-2" id="actions-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="docs-buttons">
+ <!-- <h3>Toolbar:</h3> -->
+ <div class="btn-group">
+ <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45"
+ title="Rotate Left">
+ <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+ <i class="ti ti-rotate-2"></i>
+ </span>
+ </button>
+ <button type="button" class="btn btn-primary" data-method="rotate" data-option="45"
+ title="Rotate Right">
+ <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+ <i class="ti ti-rotate-clockwise-2"></i>
+ </span>
+ </button>
+ </div>
+
+ <div class="btn-group">
+ <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1"
+ title="Zoom In">
+ <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+ <i class="ti ti-zoom-in"></i>
+ </span>
+ </button>
+ <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1"
+ title="Zoom Out">
+ <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+ <i class="ti ti-zoom-out"></i>
+ </span>
+ </button>
+ </div>
+
+ <div class="docs-data px-2">
+ <div class="input-group  my-2">
+ <input type="number" class="form-control cropWidth" id="cropWidth-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ placeholder="width">
+ <span class="input-group-append">
+ <span class="input-group-text">px</span>
+ </span>
+ </div>
+ <div class="input-group  my-2">
+ <input type="number" class="form-control cropHeight" id="cropHeight-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ placeholder="height">
+ <span class="input-group-append">
+ <span class="input-group-text">px</span>
+ </span>
+ </div>
+ </div>
+
+ <div class="btn-group px-2 w-100">
+ <button type="button" class="btn btn-primary crop-reset" id="crop-reset-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-method="reset" title="Reset">
+ <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+ <i class="ti ti-refresh"></i> Làm lại
+ </span>
+ </button>
+ </div>
+
+ <!-- Show the cropped image in modal -->
+ </div><!-- /.docs-buttons -->
+ </div>
+ <ul>
+ <li>
+ <button id="saveButton-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>" type="button"
+ class="saveButton  btn-primary btn-crop-img"><i class="ti ti-circle-plus"></i> Áp dụng</button>
+ </li>
+ </ul>
+ <div class="view-size"><?php echo \htmlentities($photoDetail['dimension']??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+
+ <div class="view-cropper">
+ <div class="photoUpload-detail" id="photoUpload-preview-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php if(!empty($photoDetail['image'])): ?>
+ <a class="img-container">
+ <img class="rounded" onerror="this.src='../assets/images/noimage.png';"
+ data-src="<?php echo \htmlentities(upload($photoDetail['upload'], $photoDetail['image'])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ src="<?php echo \htmlentities(upload($photoDetail['upload'], $photoDetail['image'])??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Alt photo"
+ title="Alt photo" />
+ </a>
+ <?php else: ?>
+ <img class="rounded" onerror="this.src='../assets/images/noimage.png';"
+ src="<?php echo \htmlentities(upload($photoDetail['upload'], $photoDetail['image'])??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Alt photo"
+ title="Alt photo" />
+ <?php endif; ?>
+
+ <button type="button" class="crop-popup btn-primary btn-crop-img mt-3"
+ id="crop-popup-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">Chỉnh sửa ảnh</button>
+ </div>
+ </div>
+ </div>
+ <div class="file-photo">
+ <label class="photoUpload-file" id="photo-zone-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>" for="file-zone-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <input type="file" class="file-zone-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>" name="file-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ id="file-zone-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <input type="hidden" class="cropFile" name="cropFile-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ id="cropFile-<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <i class="ti ti-cloud-upload"></i>
+ <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
+ <p class="photoUpload-or">Hoặc</p>
+ <p class="photoUpload-choose btn btn-sm">Chọn hình</p>
+ </label>
+ <div class="photoUpload-dimension"><?php echo \htmlentities($photoDetail['dimension']??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+</div>

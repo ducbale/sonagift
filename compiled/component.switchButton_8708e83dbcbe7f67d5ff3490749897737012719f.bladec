@@ -1,0 +1,11 @@
+<input type="checkbox"
+ class="switch-input custom-control-input show-checkbox <?php echo \htmlentities(!isPermissions(str_replace('-', '.', $com) . '.' . $type . '.edit') ? 'pointer-events-none' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ <?php echo \htmlentities(!isPermissions(str_replace('-', '.', $com) . '.' . $type . '.edit') ? 'disabled' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ id="show-checkbox-<?php echo \htmlentities($keyC??'', ENT_QUOTES, 'UTF-8', false); ?>-<?php echo \htmlentities($idC??'', ENT_QUOTES, 'UTF-8', false); ?>" data-table="<?php echo \htmlentities($tableC??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-id="<?php echo \htmlentities($idC??'', ENT_QUOTES, 'UTF-8', false); ?>" data-attr="<?php echo \htmlentities($keyC??'', ENT_QUOTES, 'UTF-8', false); ?>" data-url="<?php echo \htmlentities(url('status')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ <?php echo \htmlentities(in_array($keyC, $status_arrayC) ? 'checked' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>>
+<span class="switch-toggle-slider">
+ <span class="switch-on"><i class="ti ti-check"></i></span>
+ <span class="switch-off"><i class="ti ti-x"></i></span>
+</span>

@@ -1,0 +1,301 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<div class="container-xxl flex-grow-1 container-p-y container-fluid">
+ <div class="app-ecommerce">
+ <form class="validation-form" name="form" novalidate method="post"
+ action="<?php echo \htmlentities(url('admin', ['com' => $com, 'act' => 'save', 'type' => $type], ['id' => $item['id'] ?? 0,'page'=>$page])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ enctype="multipart/form-data">
+ <?php  $this->startComponent('component.buttonAdd'); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php echo Flash::getMessages('admin'); ?>
+
+ <div class="row">
+ <div class="col-12 col-lg-8">
+ <?php if(!empty($configMan->slug)): ?>
+ <?php 
+ $slugchange = $act == 'edit' ? 1 : 0;
+ ?>
+ <?php  $this->startComponent('component.slug', ['slugchange' => $slugchange, 'item' => $item ?? []]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+ <div class="card mb-4">
+ <div class="card-header">
+ <h3 class="card-title">Thông tin <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?> </h3>
+ </div>
+ <div class="card-body card-article">
+ <?php  $this->startComponent('component.content', [
+ 'name' => $configMan->name ?? false,
+ 'desc' => $configMan->desc ?? false,
+ 'desc_cke' => $configMan->desc_cke ?? false,
+ 'content' => $configMan->content ?? false,
+ 'content_cke' => $configMan->content_cke ?? false,
+ 'content1' => $configMan->content ?? false,
+ 'content1_cke' => $configMan->content_cke ?? false,
+ 'parameter' => $configMan->parameter ?? false,
+ 'parameter_cke' => $configMan->parameter_cke ?? false,
+ 'promotion' => $configMan->promotion ?? false,
+ 'promotion_cke' => $configMan->promotion_cke ?? false,
+ 'incentives' => $configMan->incentives ?? false,
+ 'incentives_cke' => $configMan->incentives_cke ?? false,
+ 'item' => $item,
+ ]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </div>
+ </div>
+
+ <div class="col-12 col-lg-4">
+ <?php if(!empty($configMan->categories) || !empty($configMan->tags) || !empty($configMan->brand)): ?>
+ <div class="card mb-4 form-group-category">
+ <div class="card-header">
+ <h5 class="card-title mb-0">Danh mục sản phẩm</h5>
+ </div>
+ <div class="card-body">
+
+ <?php if(!empty($configMan->group)): ?>
+ <?php if(!empty($configMan->categories->list)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 1:</label>
+ <?php echo Func::getAjaxCategoryGroup('product_list', 'product_cat', 'list', $type, 'Danh mục cấp 1'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->cat)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 2:</label>
+ <?php echo Func::getAjaxCategoryGroup('product_cat', 'product_item', 'cat', $type, 'Danh mục cấp 2'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->item)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 3:</label>
+ <?php echo Func::getAjaxCategoryGroup('product_item', 'product_sub', 'item', $type, 'Danh mục cấp 3'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->sub)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 4:</label>
+ <?php echo Func::getAjaxCategoryGroup('product_sub', '', 'sub', $type, 'Danh mục cấp 4'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php else: ?>
+ <?php if(!empty($configMan->categories->list)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 1:</label>
+ <?php echo Func::getAjaxCategory('product_list', 'product_cat', 'list', $type, 'Danh mục cấp 1'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->cat)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 2:</label>
+ <?php echo Func::getAjaxCategory('product_cat', 'product_item', 'cat', $type, 'Danh mục cấp 2'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->item)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 3:</label>
+ <?php echo Func::getAjaxCategory('product_item', 'product_sub', 'item', $type, 'Danh mục cấp 3'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->categories->sub)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_list">Danh mục cấp 4:</label>
+ <?php echo Func::getAjaxCategory('product_sub', '', 'sub', $type, 'Danh mục cấp 4'); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php endif; ?>
+
+ <?php if(!empty($configMan->brand)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label"
+ for="id_brand"><?php echo \htmlentities($configMan->brand->title_main_brand??'', ENT_QUOTES, 'UTF-8', false); ?></label>
+ <?php echo Func::getAjaxCategory('product_brand', '', 'brand', $type, $configMan->brand->title_main_brand); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->tags)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_tags">Danh mục tags:</label>
+ <?php echo Func::getTags(@$item['id'], 'dataTags', 'product_tags', $type); ?>
+
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->suggest)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="id_tags">Gợi ý hôm nay:</label>
+ <?php echo Func::getTags(@$item['id'], 'dataSuggest', 'product_tags', 'goi-y-hom-nay'); ?>
+
+ </div>
+ <?php endif; ?>
+ </div>
+ </div>
+ <?php endif; ?>
+
+ <?php if(!empty($configMan->images)): ?>
+ <?php $__currentLoopData = $configMan->images; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $photo): $loop = $this->incrementLoopIndices();  ?>
+ <div class="card mb-4">
+ <div class="card-header">
+ <h5 class="card-title mb-0"><?php echo \htmlentities($photo->title??'', ENT_QUOTES, 'UTF-8', false); ?></h5>
+ </div>
+ <div class="card-body">
+ <?php 
+ /* Photo detail */
+ $photoDetail = [];
+ $photoAction = 'photo';
+ $photoDetail['upload'] = 'product';
+ $photoDetail['image'] = !empty($item) ? $item[$key] : '';
+ $photoDetail['dimension'] =
+ 'Width: ' .
+ $configMan->images->$key->width .
+ ' px - Height: ' .
+ $configMan->images->$key->height .
+ ' px (' .
+ config('type.type_img') .
+ ')';
+ ?>
+ <?php  $this->startComponent('component.image', ['photoDetail' => $photoDetail, 'photoAction' => 'photo', 'key' => $key]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+
+ <div class="card mb-4">
+ <?php  $this->startComponent('component.tinhtrang', ['item' => $item ?? [], 'status' => $configMan->status ?? [], 'stt' => true]); ?>
+ <?php if(!empty($configMan->datePublish)): ?>
+ <?php  $this->startComponent('component.datePublish', ['item' => $item ?? []]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </div>
+ </div>
+ <?php if(!empty($configMan->code) || !empty($configMan->regular_price) || !empty($configMan->sale_price)): ?>
+ <div class="col-12 col-lg-12">
+ <div class="card mb-4">
+ <div class="card-header">
+ <h3 class="card-title">Thông tin <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ </div>
+ <div class="card-body">
+ <div class="row">
+ <?php if(!empty($configMan->code)): ?>
+ <div class="form-group col-md-4">
+ <label class="form-label" for="code">Mã sản phẩm:</label>
+ <input type="text" class="form-control" name="data[code]" id="code"
+ placeholder="Mã sản phẩm"
+ value="<?php echo \htmlentities(!empty(Flash::has('code')) ? Flash::get('code') : @$item['code']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php endif; ?>
+ </div>
+ <div class="row">
+ <?php if(!empty($configMan->regular_price)): ?>
+ <div class="form-group col-md-4 last:!mb-0 md:!mb-0">
+ <label class="form-label" for="regular_price">Giá:</label>
+ <div class="input-group">
+ <input type="text" name="data[regular_price]"
+ class="form-control format-price regular_price" placeholder="Giá"
+ aria-label="Giá" id="regular_price" aria-describedby="regular_price"
+ value="<?php echo \htmlentities(!empty(Flash::has('regular_price')) ? Flash::get('regular_price') : @$item['regular_price']??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+ <span class="input-group-text" id="regular_price">VNĐ</span>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->sale_price)): ?>
+ <div class="form-group col-md-4 last:!mb-0 md:!mb-0">
+ <label class="form-label" for="regular_price">Giá khuyến mãi:</label>
+ <div class="input-group">
+ <input type="text" name="data[sale_price]"
+ class="form-control format-price sale_price" placeholder="Giá"
+ aria-label="Giá khuyến mãi" id="sale_price" aria-describedby="sale_price"
+ value="<?php echo \htmlentities(!empty(Flash::has('sale_price')) ? Flash::get('sale_price') : @$item['sale_price']??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+ <span class="input-group-text" id="sale_price">VNĐ</span>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->sale_price)): ?>
+ <div class="form-group col-md-4 last:!mb-0 md:!mb-0">
+ <label class="form-label" for="discount">Chiếc khấu:</label>
+ <div class="input-group">
+ <input type="text" class="form-control  discount text-sm"
+ name="data[discount]" id="discount" aria-label="Chiếc khấu"
+ placeholder="Chiếc khấu"
+ value="<?php echo \htmlentities(!empty(Flash::has('discount')) ? Flash::get('discount') : @$item['discount']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ maxlength="3" readonly>
+ <span class="input-group-text" id="discount">%</span>
+ </div>
+ </div>
+ <?php endif; ?>
+ </div>
+
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->properties)): ?>
+ <div class="col-12 col-lg-12">
+ <div class="card mb-4">
+ <div class="card-header">
+ <h3 class="card-title">Thuộc tính <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ </div>
+ <div class="card-body">
+ <div class="list-properties form-group-category">
+ <?php if(!empty($propertieslist)): ?>
+ <?php  $this->startComponent('component.propertiesList', ['propertieslist' => $propertieslist, 'item' => $item]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+ </div>
+ <div class="group-properties">
+ <?php if(!empty($propertiescard)): ?>
+ <?php $__currentLoopData = $propertiescard; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $value): $loop = $this->incrementLoopIndices();  ?>
+ <?php $code = md5($value['id_properties'])  ?>
+ <?php  $this->startComponent('component.propertiesCard', ['value' => $value, 'key' => $key, 'code' => $code]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+
+ <?php if(!empty($configMan->gallery)): ?>
+ <?php  $this->startComponent('component.filergallery', [
+ 'title_main' => $configMan->title_main,
+ 'gallery' => $gallery ?? [],
+ 'act' => $act,
+ 'folder' => 'product',
+ ]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+
+ <?php if(!empty($configMan->seo)): ?>
+ <?php  $this->startComponent('component.seo', ['item' => $item ?? [], 'com' => $com, 'schema' => $configMan->schema]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+
+ <?php if(!empty($configMan->schema)): ?>
+ <?php  $this->startComponent('component.schema', ['item' => $item ?? []]); ?>
+ <input type="hidden" id="schema-type" value="product">
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+
+ <input type="hidden" name="id"
+ value="<?= !empty($item['id']) && $item['id'] > 0 ? $item['id'] : '' ?>">
+ <input name="csrf_token" type="hidden" value="<?php echo \htmlentities(csrf_token()??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php  $this->startComponent('component.buttonAdd'); ?>
+ <?php echo $this->renderComponent(); ?>
+
+ </form>
+ </div>
+</div>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

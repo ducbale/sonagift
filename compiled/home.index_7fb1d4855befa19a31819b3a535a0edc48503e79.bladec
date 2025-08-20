@@ -1,0 +1,344 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <h1 class="hidden"><?php echo Seo::get('title'); ?></h1>
+ <?php if($listProductNB1->isNotEmpty()): ?>
+ <div class="wrap-prolist1">
+ <div class="wrap-content">
+ <div class="owl-prolist1 p-relative" data-aos="fade-up" data-aos-duration="1000">
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:2|margin:10,screen:425|items:3|margin:10,screen:575|items:4|margin:10,screen:767|items:4|margin:10,screen:991|items:5|margin:10,screen:1199|items:4|margin:10"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1"
+ data-touchdrag="1" data-smartspeed="500" data-autoplayspeed="3500" data-dots="0"
+ data-nav="0" data-navcontainer="">
+ <?php $__currentLoopData = $listProductNB1; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="item_prolist1">
+ <div class="pic_prolist1">
+ <a class="" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.categories.list.images.icon.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.categories.list.images.icon.thumb'), $v['icon'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
+ <div class="info_prolist1">
+ <h3 class="">
+ <a class="text-split name_prolist1 text-decoration-none" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ <?php if(empty($v['desc'.$lang])): ?>
+ <div class="desc_prolist1"><?php echo \htmlentities($v->get_items_n_b_count??'', ENT_QUOTES, 'UTF-8', false); ?>  sản phẩm</div>
+ <?php else: ?>
+ <div class="desc_prolist1"><?php echo \htmlentities($v['desc'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <?php endif; ?>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($proFlashsale->isNotEmpty()): ?>
+ <div class="wrap_flashsale">
+ <div class="wrap-content">
+ <div class="title_flashsale" data-aos="fade-up" data-aos-duration="1000">
+ <h2>Flash sale</h2>
+ <a href="flash-sale" class="xemthem_newshome">Xem tất cả <img class="ms-2" src="assets/images/right.png"></a>
+ </div>
+ <div class="owl_flashsale" data-aos="fade-up" data-aos-duration="1000">
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:1|margin:10,screen:425|items:1|margin:10,screen:575|items:3|margin:10,screen:767|items:2|margin:10,screen:991|items:3|margin:10,screen:1199|items:3|margin:0"
+ data-rewind="1" data-autoplay="0" data-loop="0" data-lazyload="0" data-mousedrag="1"
+ data-touchdrag="1" data-smartspeed="800" data-autoplayspeed="800" data-autoplaytimeout="5000"
+ data-dots="0" data-animations="" data-nav="0" data-navcontainer="">
+ <?php $__currentLoopData = $proFlashsale; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php 
+ $flagPro = Func::status($v['status'],'hot');
+ $flagPro1 = Func::status($v['status'],'sale');
+ $flagPro2 = Func::status($v['status'],'stock');
+ ?>
+ <div class="item_flashsale">
+ <?php if($flagPro2==true): ?>  
+ <span class="soldout">sold out</span>
+ <?php endif; ?>
+ <div class="pic_flashsale">
+ <a class="scale-img" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="<?php if($v['photo2']): ?> pic1 <?php endif; ?>">
+ <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php if($v['photo2']): ?>
+ <div class="pic2">
+ <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ data-src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo2'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php endif; ?>
+ </a>
+ <?php if($flagPro2==false && !empty($v->regular_price)): ?>
+ <a class="transition addcart text-decoration-none addnow"  data-id="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-action="addnow"><?php echo \htmlentities(__('web.themvaogiohang')??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </a>
+ <?php else: ?>
+ <a class="transition addcart text-decoration-none " href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities(__('web.xemchitiet')??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </a>
+ <?php endif; ?>
+ 
+ <input class="hidden qty-pro" value="1">
+ <div class="button-in quickshop">
+ <div class="quickshop-1" data-fancybox="quick-view" data-type="ajax" data-src="<?php echo \htmlentities(url('load-quickview') .'?id='.$v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"  data-id="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" data-url="<?php echo \htmlentities(url('load-quickview')??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <span class="ts-tooltip button-tooltip">Quick view</span>
+ <i class="fas fa-search"></i>
+ </div>
+ </div>
+ <div class="show-quickview"></div>
+ </div>
+ <div class="info_flashsale">
+ <?php if($flagPro==true || $flagPro1==true): ?>
+ <div class="discount_flashsale">
+ <?php if($flagPro==true): ?> Hot . <?php endif; ?><?php if($flagPro1==true): ?>  Sale <?php endif; ?>off <?php echo \htmlentities($v->discount??'', ENT_QUOTES, 'UTF-8', false); ?>%
+ </div>
+ <?php endif; ?>
+ <h3 class="name_flashsale">
+ <a class="text-split" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ <div class="price_flashsale">
+ <?php if(empty($v->sale_price)): ?>
+ <?php if(empty($v->regular_price)): ?>
+ <span class="flashsale_new"><?php echo \htmlentities(__('web.lienhe')??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <?php else: ?>
+ <span class="flashsale_new"><?php echo \htmlentities(Func::formatMoney($v->regular_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <?php endif; ?>
+ <?php else: ?>
+ <span class="flashsale_new"><?php echo \htmlentities(Func::formatMoney($v->sale_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <span class="flashsale_old"><?php echo \htmlentities(Func::formatMoney($v->regular_price)??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <?php endif; ?>
+ </div>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($newsHome1->isNotEmpty()): ?>
+ <div class="wrap_newshome1">
+ <div class="wrap-content">
+ <div class="title_newshome1" data-aos="fade-up" data-aos-duration="1000">
+ <h2>chúng tôi chỉ phục vụ những gì tốt nhất cho bạn</h2>
+ </div>
+ <div data-aos="fade-up" data-aos-duration="1000">
+ <div class="slick-baiviet">
+ <?php $__currentLoopData = $newsHome1; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="item_newshome1">
+ <div class="pic_newshome1">
+ <a class="scale-img" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.news.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('news', config('type.news.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
+ <div class="info_newshome1">
+ <h3 class="name_newshome1">
+ <a class="text-split" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ <div class="desc_newshome1 text-split"><?php echo Func::decodeHtmlChars($v['desc'.$lang]); ?></div>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($quangcao->isNotEmpty()): ?>
+ <div class="wrap_quangcao">
+ <div class="wrap-content">
+ <?php $__currentLoopData = $quangcao; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="items_quangcao d-flex justify-content-between align-items-center <?php if($k%2 != 0): ?> flex-row-reverse <?php endif; ?>" data-aos="fade-up" data-aos-duration="1000">
+ <div class="pic_quangcao">
+ <a class="scale-img" href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>" target="_blank">
+ <img onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.photo.'.$v['type'].'.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.'.$v['type'].'.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
+ <div class="info_quangcao">
+ <h3 class="name_quangcao"><?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ <div class="desc_quangcao text-split"><?php echo \htmlentities($v['desc' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <a class="btn_quangcao" href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>" >Mua ngay</a>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($banner_qc)): ?>
+ <div class="wrap_bannerqc" data-aos="zoom-in" data-aos-duration="1000">
+ 
+ <a class="block scale-img hover_sang2" href="<?php echo \htmlentities($banner_qc['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img class="w-full"
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $banner_qc['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $banner_qc['type'] . '.thumb'), $banner_qc['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
+ 
+ <?php endif; ?>
+ <?php if($productNB->isNotEmpty()): ?>
+ <div class="wrap_pronb load-product-home" data-url="<?php echo \htmlentities(url('load-product')??'', ENT_QUOTES, 'UTF-8', false); ?>" data-type="san-pham" data-status="noibat1" data-paginate="4" data-other="1" data-template='List' data-slug="san-pham" data-eshow=".paging-product-home">
+ <div class="wrap-content" >
+ <div class="title_pronb" data-aos="fade-up" data-aos-duration="1000">
+ <h2>sản phẩm nổi bật của sona</h2>
+ </div>
+ <div class="paging-product-home" ></div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($listProductNB->isNotEmpty()): ?>
+ <?php $__currentLoopData = $listProductNB; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $vlist): $loop = $this->incrementLoopIndices();  ?>
+ <?php if(!empty($vlist->getItemsNB->isNotEmpty())): ?>
+ <div id="other-product" class="wrap_listnb load-product-home">
+ <div class="wrap-content" data-aos="fade-up" data-aos-duration="1000">
+ <div class="title-list-main">
+ <div class="left-title">
+ <div class="title-pro hidden"><span class=""><?php echo \htmlentities($vlist['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></span></div>
+ <div class="list-c2">
+ <?php if(!empty($vlist->getCategoryCatsHome)): ?>
+ <div class="title-cat-main click-product">
+ <?php $__currentLoopData = $vlist->getCategoryCatsHome ?? []; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $cat): $loop = $this->incrementLoopIndices();  ?>
+ <span class="" data-url="<?php echo \htmlentities(url('load-product')??'', ENT_QUOTES, 'UTF-8', false); ?>" data-cat="<?php echo \htmlentities($cat['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"  data-list="<?php echo \htmlentities($vlist['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" data-status="noibat" data-paginate="4" data-other="1" data-eshow=".list-<?php echo \htmlentities($vlist['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-slug="<?php echo \htmlentities($cat['slug' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>" data-type="san-pham" 
+ data-template="List">
+ <?php echo \htmlentities($cat['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </span>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php endif; ?>
+ </div>
+ </div>
+ <a href="<?php echo \htmlentities($vlist->slug??'', ENT_QUOTES, 'UTF-8', false); ?>" class="xemthem_newshome">Xem tất cả <img class="ms-2" src="assets/images/right.png"></a>
+ </div>
+ <div class="paging-product list-<?php echo \htmlentities($vlist['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"></div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+ <?php if($doitac->isNotEmpty()): ?>
+ <div class="wrap_partner">
+ <div class="wrap-content">
+ <div class="title_partner" data-aos="fade-up" data-aos-duration="1000">
+ <h2>200+ doanh nghiệp đã sử dụng</h2>
+ </div>
+ <div class="d-flex justify-content-start flex-wrap flex_partner">
+ <?php $__currentLoopData = $doitac; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <a class="block items_partner" href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>" data-aos="fade-up" data-aos-duration="1000"> 
+ <img class="w-full"
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $v['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $v['type'] . '.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($newsHome->isNotEmpty()): ?>
+ <div class="wrap_newshome">
+ <div class="wrap-content">
+ <div class="title_newshome" data-aos="fade-up" data-aos-duration="1000">
+ <h2>Tin tức - sự kiện</h2>
+ <a href="bai-viet" class="xemthem_newshome">Xem tất cả <img class="ms-2" src="assets/images/right.png"></a>
+ </div>
+ <div data-aos="fade-up" data-aos-duration="1000">
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:1|margin:10,screen:425|items:1|margin:10,screen:575|items:3|margin:10,screen:767|items:2|margin:10,screen:991|items:2|margin:10,screen:1199|items:2|margin:30"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1"
+ data-touchdrag="1" data-smartspeed="800" data-autoplayspeed="800" data-autoplaytimeout="5000"
+ data-dots="0" data-animations="" data-nav="0" data-navcontainer="">
+ <?php $__currentLoopData = $newsHome; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="item_newshome">
+ <div class="pic_newshome">
+ <a class="" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.news.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('news', config('type.news.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
+ <div class="info_newshome">
+ <h3 class="name_newshome">
+ <a class="text-split" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ <span><?php echo \htmlentities(__('web.ngaydang')??'', ENT_QUOTES, 'UTF-8', false); ?>: <?php echo \htmlentities(\Carbon\Carbon::parse($v->created_at)->format('d/m/Y')??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ <div class="desc_newshome text-split"><?php echo \htmlentities($v['desc'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if($feedback->isNotEmpty()): ?>
+ <div class="wrap_feedback">
+ <div class="wrap-content">
+ <div class="title_feedback" data-aos="fade-up" data-aos-duration="1000">
+ <h2>đánh giá khách hàng</h2>
+ </div>
+ <div data-aos="fade-up" data-aos-duration="1000">
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:2|margin:10,screen:425|items:3|margin:10,screen:575|items:4|margin:10,screen:767|items:4|margin:10,screen:991|items:5|margin:10,screen:1199|items:2|margin:30"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1"
+ data-touchdrag="1" data-smartspeed="500" data-autoplayspeed="3500" data-dots="0"
+ data-nav="0" data-navcontainer="">
+ <?php $__currentLoopData = $feedback; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="item_feedback">
+ <div class="pic_feedback scale-img">
+ <img onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.news.' . $v['type'] . '.images.photo.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('news', config('type.news.' . $v['type'] . '.images.photo.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="info_feedback">
+ <div class="mb-2"><img src="assets/images/start.png"></div>
+ <div class="desc_feedback text-split"><?php echo \htmlentities($v['desc'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="name_feedback"><?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="office_feedback"><?php echo \htmlentities($v['office'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($video_home)): ?>
+ <div class="wrap_videohome">
+ <div class="" data-aos="zoom-in" data-aos-duration="1000">
+ <a class="block pic_videohome" data-fancybox="video-gallery" href="<?php echo \htmlentities(Func::get_youtube_shorts($video_home['link'])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($video_home['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img class="w-full"
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $video_home['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $video_home['type'] . '.thumb'), $video_home['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php if(!empty($video_home['link'])): ?> 
+ <div class="buttun-play"></div>
+ <?php endif; ?>
+ </a>
+ </div>
+ </div>
+ <?php endif; ?>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

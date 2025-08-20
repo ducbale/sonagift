@@ -1,0 +1,14 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('contentmaster'); ?>
+ <?php echo $this->runChild('layout.header'); ?>
+ <?php echo $this->runChild('layout.menu'); ?>
+ <?php echo $this->includeWhen(!empty($slider), 'layout.slider'); ?>
+ <?php echo $this->includeWhen(\NINA\Core\Support\Str::isNotEmpty(BreadCrumbs::get()),'layout.breadcrumbs'); ?>
+ <?php echo $this->yieldContent('content'); ?>
+ <?php echo $this->runChild('layout.footer'); ?>
+ <?php echo $this->runChild('layout.phone'); ?>
+ <?php echo $this->runChild('layout.extensions'); ?>
+ <?php echo $this->runChild('layout.strucdata'); ?>
+
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('master'); } ?>

@@ -1,0 +1,46 @@
+<base href="<?php echo \htmlentities(config('app.asset')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo Seo::get('title'); ?></title>
+<meta name="keywords" content="<?php echo Seo::get('keywords'); ?>" />
+<meta name="description" content="<?php echo Seo::get('description'); ?>" />
+<?php if(config('app.site_path') != '/'): ?>
+ <meta name="robots" content="noindex, nofollow">
+<?php else: ?>
+ <meta name="robots" content="<?php echo \htmlentities(!\NINA\Core\Support\Str::isEmpty(Seo::get('meta')) ? Seo::get('meta') : 'index,follow,noodp'??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<?php endif; ?>
+<link href="<?php echo \htmlentities(assets_photo('photo','48x48x1',$favicon['photo'],'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" rel="shortcut icon" type="image/x-icon" />
+<link rel="icon" type="image/x-icon" href="<?php echo \htmlentities(assets_photo('photo','48x48x1',$favicon['photo'],'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<?php echo Func::decodeHtmlChars($setting['mastertool']); ?>
+
+<?php echo Func::decodeHtmlChars($setting['analytics']); ?>
+
+<?php echo Func::decodeHtmlChars($setting['headjs']); ?>
+
+<meta name="geo.region" content="VN" />
+<meta name="geo.placename" content="Hồ Chí Minh" />
+<meta name="geo.position" content="10.823099;106.629664" />
+<meta name="ICBM" content="10.823099, 106.629664" />
+<meta name='revisit-after' content='1 days' />
+<meta name="author" content="<?php echo $setting['namevi']; ?>" />
+<meta name="copyright" content="<?php echo $setting['namevi'] . ' - [' . $optSetting['email'] . ']'; ?>" />
+<meta property="og:type" content="<?php echo \htmlentities(Seo::get('type')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:site_name" content="<?php echo $setting['namevi']; ?>" />
+<meta property="og:title" content="<?php echo Seo::get('title'); ?>" />
+<meta property="og:description" content="<?php echo Seo::get('description'); ?>" />
+<meta property="og:url" content="<?php echo \htmlentities(Seo::get('url')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:image" content="<?php echo \htmlentities(Seo::get('photo')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:image:alt" content="<?php echo Seo::get('title'); ?>" />
+<meta property="og:image:type" content="<?php echo \htmlentities(Seo::get('photo:type')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:image:width" content="<?php echo \htmlentities(Seo::get('photo:width')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:image:height" content="<?php echo \htmlentities(Seo::get('photo:height')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="<?php echo \htmlentities($optSetting['email']??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta name="twitter:creator" content="<?php echo $setting['namevi']; ?>" />
+<meta property="og:url" content="<?php echo \htmlentities(Seo::get('url')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta property="og:title" content="<?php echo Seo::get('title'); ?>" />
+<meta property="og:description" content="<?php echo Seo::get('description'); ?>" />
+<meta property="og:image" content="<?php echo \htmlentities(Seo::get('photo')??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+<meta name="google-site-verification" content="pLjLUVHWTcoOARzK3qzVgozJrCpWtsxfpRIkaeELtr8" />
+<link rel="canonical" href="<?php  echo $this->getCanonicalUrl();?>" />
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=1349">

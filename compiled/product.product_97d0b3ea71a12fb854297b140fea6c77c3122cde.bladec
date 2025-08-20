@@ -1,0 +1,75 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <div class="max-width py-3">
+ <div class="title-detail">
+ <h1><?php echo \htmlentities($titleMain??'', ENT_QUOTES, 'UTF-8', false); ?></h1>
+ <h2 class="hidden"><?php echo \htmlentities($titleMain??'', ENT_QUOTES, 'UTF-8', false); ?></h2>
+ <div class="filter"><i class="fa-solid fa-filter"></i>&nbsp; <?php echo \htmlentities(__('web.loc')??'', ENT_QUOTES, 'UTF-8', false); ?> </div>
+ </div>
+ <?php if($com=='tim-kiem'): ?>
+ <div class="div_kq_search mb-4"><?php echo \htmlentities($titleMain??'', ENT_QUOTES, 'UTF-8', false); ?> (<?php echo \htmlentities(count($product)??'', ENT_QUOTES, 'UTF-8', false); ?>): <span>"<?php echo \htmlentities($keyword??'', ENT_QUOTES, 'UTF-8', false); ?>"</span></div>
+ <?php endif; ?>
+ <div class="sort-select" x-data="{ open: false }">
+ <p class="click-sort" @click="open = ! open"><?php echo \htmlentities(__('web.sapxep')??'', ENT_QUOTES, 'UTF-8', false); ?>: <span
+ class="sort-show"><?php echo \htmlentities(__('web.moinhat')??'', ENT_QUOTES, 'UTF-8', false); ?></span></p>
+ <div class="sort-select-main sort" x-show="open">
+ <p><a data-sort="1"
+ class="<?php echo \htmlentities(Request()->sort == 1 || empty(Request()->sort) ? 'check' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"><i></i><?php echo \htmlentities(__('web.moinhat')??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </p>
+ <p><a data-sort="2" class="<?php echo \htmlentities(Request()->sort == 2 ? 'check' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"><i></i><?php echo \htmlentities(__('web.cunhat')??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ <p><a data-sort="3"
+ class="<?php echo \htmlentities(Request()->sort == 3 ? 'check' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"><i></i><?php echo \htmlentities(__('web.giacaodenthap')??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ <p><a data-sort="4"
+ class="<?php echo \htmlentities(Request()->sort == 4 ? 'check' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"><i></i><?php echo \htmlentities(__('web.giathapdencao')??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ <input type="hidden" name="url" class="url-search" value="<?php echo \htmlentities(Request()->url()??'', ENT_QUOTES, 'UTF-8', false); ?>" />
+ </div>
+ </div>
+ <div class="flex-product-main">
+ <?php if(!empty($listProperties) && $listProperties->isNotEmpty()): ?>
+ <div class="left-product">
+ <?php $__currentLoopData = $listProperties; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $list): $loop = $this->incrementLoopIndices();  ?>
+ <div class="wr-search p-0">
+ <p class="text-split transition"><?php echo \htmlentities($list[0]['namevi']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <ul class="p-0">
+ <?php $__currentLoopData = $list[1]; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $value): $loop = $this->incrementLoopIndices();  ?>
+ <?php 
+ $listP = $list[0]['slugvi'];
+ $arrayC = !empty(Request()->$listP) ? explode(',', Request()->$listP) : [];
+ ?>
+ <li class="item-search mb-2">
+ <input <?php echo \htmlentities(in_array($value['id'], $arrayC) ? 'checked' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ class="ip-search mx-2" id="<?php echo \htmlentities($list[0]['slugvi']??'', ENT_QUOTES, 'UTF-8', false); ?>-<?php echo \htmlentities($list[0]['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ type="checkbox" data-list="<?php echo \htmlentities($list[0]['slugvi']??'', ENT_QUOTES, 'UTF-8', false); ?>" name="ip-search"
+ value="<?php echo \htmlentities($value['id']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <label for="<?php echo \htmlentities($list[0]['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($value['namevi']??'', ENT_QUOTES, 'UTF-8', false); ?></label>
+ </li>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </ul>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+ </div>
+ <?php endif; ?>
+ <div class="right-product <?php echo \htmlentities(!empty($listProperties) ? '' : 'w-100'??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php if(!empty($product)): ?>
+ <div class="row row-0">
+ <?php $__currentLoopData = $product; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="col-6  mb-2 col-0">
+ <?php  $this->startComponent('component.itemProduct', ['product' => $v]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php endif; ?>
+ <?php echo $product->appends(request()->query())->links(); ?>
+
+ </div>
+ </div>
+ </div>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

@@ -1,0 +1,327 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('content'); ?>
+<div class="container-xxl flex-grow-1 container-p-y container-fluid">
+ <div class="app-ecommerce">
+ <form class="validation-form" novalidate method="post" action="<?php echo \htmlentities(url('admin',['com'=>$com,'act'=>'save','type'=>$type],['id'=>$item['id']??0])??'', ENT_QUOTES, 'UTF-8', false); ?>" enctype="multipart/form-data">
+
+ <?php  $this->startComponent('component.buttonAdd'); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php echo Flash::getMessages('admin'); ?>
+
+ <div class="row">
+ <?php if(!empty($configMan->images) && !empty($configMan->watermark)): ?>
+ <div class="col-12 col-lg-12">
+ <div class="card mb-4">
+ <div class="card-header">
+ <h5 class="card-title mb-0">Hình ảnh
+ <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </h5>
+ </div>
+ <div class="card-body" x-data="imageUploader()">
+ <div class="row mb-3">
+ <div class="col-sm-6 col-md-4">
+ <img x-ref="uploadedPhoto" :src="imageSrc" src="<?php echo \htmlentities((!empty($item['photo']))?upload('photo',$item['photo']):assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="photoUpload" class="d-block rounded" id="uploadedphoto">
+ </div>
+ </div>
+ <div class="row mb-3 last:!mb-0">
+ <div class="col-sm-6 col-md-4 ">
+ <div class="form-group mb-0">
+ <div class="button-wrapper">
+ <label for="upload" class="btn btn-primary me-2 mb-3 waves-effect waves-light" tabindex="0">
+ <span class="d-none d-sm-block">Chọn hình ảnh</span>
+ <i class="ti ti-upload d-block d-sm-none"></i>
+ <input type="file" id="upload" @change="updateImage" x-ref="fileInput" class="change-file-input" name="file-photo" hidden="" accept="image/png, image/jpeg">
+ </label>
+ <button type="button" @click="resetImage" class="btn btn-label-secondary change-image-reset mb-3 waves-effect">
+ <i class="ti ti-refresh-dot d-block d-sm-none"></i>
+ <span class="d-none d-sm-block">Đặt lại</span>
+ </button>
+ <div class="text-muted">Width:<?php echo \htmlentities($configMan->width??'', ENT_QUOTES, 'UTF-8', false); ?> px - Height: <?php echo \htmlentities($configMan->height??'', ENT_QUOTES, 'UTF-8', false); ?> px (<?php echo \htmlentities(config('type.type_img')??'', ENT_QUOTES, 'UTF-8', false); ?>)</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php if(!empty($configMan->watermark)): ?>
+ <div class="row ">
+ <div class="col-sm-5 col-md-3 col-12 mb-3 mb-sm-0">
+ <strong class="mb-2 d-block">Chọn vị trí đóng dấu:</strong>
+ <div class="watermark-position rounded gap-[10px] p-[10px] max-w-px-300 bg-gray-200 grid grid-cols-3 grid-rows-3">
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default ='top-left'" for="top-left">
+ <input type="radio" x-bind:checked="position_default=='top-left'" name="options[position]" value="top-left" id="top-left" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'top'" for="top">
+ <input type="radio" x-bind:checked="position_default=='top'" name="options[position]" value="top" id="top" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'top-right'" for="top-right">
+ <input type="radio" x-bind:checked="position_default=='top-right'" name="options[position]" value="top-right" id="top-right" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'left'" for="left">
+ <input type="radio" x-bind:checked="position_default=='left'" name="options[position]" value="left" id="left" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'center'" for="center">
+ <input type="radio" x-bind:checked="position_default=='center'" name="options[position]" value="center" id="center" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'right'" for="right">
+ <input type="radio" x-bind:checked="position_default=='right'" name="options[position]" value="right" id="right" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'bottom-left'" for="bottom-left">
+ <input type="radio" x-bind:checked="position_default=='bottom-left'" name="options[position]" value="bottom-left" id="bottom-left" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'bottom'" for="bottom">
+ <input type="radio" x-bind:checked="position_default=='bottom'" name="options[position]" value="bottom" id="bottom" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+
+ <div class="box-watermark">
+ <label class="mb-0 cursor-pointer" @click="position_default = 'bottom-right'" for="bottom-right">
+ <input type="radio" x-bind:checked="position_default=='bottom-right'" name="options[position]" value="bottom-right" id="bottom-right" class="d-none">
+ <span class="block">
+ <img src="<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="" class="d-block w-px-100 rounded">
+ </span>
+ </label>
+ </div>
+ </div>
+ </div>
+ <div class="col-sm-7 col-md-9 col-12 mt-23 ">
+ <div class="row">
+ <div class="mb-3 col-md-12" x-data="{ opacity: '<?php echo \htmlentities($options['opacity']??0??'', ENT_QUOTES, 'UTF-8', false); ?>' }">
+ <label for="opacity" class="form-label">Độ trong suốt</label>
+ <input type="number" x-model.number="opacity" @input="opacity = Math.min(Math.max(opacity, 0), 100)" class="form-control" id="opacity" name="options[opacity]" placeholder="0 - 100">
+ <p class="text-danger mt-1 small">Độ trong suốt có giá trị từ 0 - 100</p>
+ </div>
+ <div class="mb-3 col-md-12">
+ <label for="offset_x" class="form-label">Độ lệch tương đối tùy chọn của hình ảnh mới trên trục x</label>
+ <input type="text" class="form-control" id="offset_x" name="options[offset_x]" value="<?php echo \htmlentities($options['offset_x']??0??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="col-md-12">
+ <label for="offset_y" class="form-label">Độ lệch tương đối tùy chọn của hình ảnh mới trên trục y</label>
+ <input type="text" class="form-control" id="offset_y" name="options[offset_y]" value="<?php echo \htmlentities($options['offset_y']??0??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="col-md-12 mt-2">
+ <p class="text-danger mb-0"><strong><i class="ti ti-exclamation-circle ms-1"></i> Lưu ý:</strong> Cân xóa dữ liệu cache khi có sự thay đổi về giá trị của watermark</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>
+ <div class="col-12 col-lg-12">
+ <div class="card mb-4">
+ <div class="card-header">
+ <h3 class="card-title">Thông tin <?php echo \htmlentities($configMan->title_main??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </h3>
+ </div>
+ <div class="card-body card-article">
+ <?php if(!empty($configMan->link)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="link">Link:</label>
+ <input type="text" class="form-control  text-sm" name="data[link]" id="name" placeholder="Link" value="<?php echo \htmlentities(!empty(Flash::has('link')) ? Flash::get('link') : $item['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php endif; ?>
+ <div class="form-group last:!mb-0">
+ <?php $status_array = !empty($item['status']) ? explode(',', $item['status']) : [];  ?>
+ <?php if(!empty($configMan->status)): ?>
+ <?php $__currentLoopData = $configMan->status; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $value): $loop = $this->incrementLoopIndices();  ?>
+ <div class="form-group d-inline-block mb-2 me-5">
+ <label for="<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?= $value ?>:</label>
+ <label class="switch switch-success">
+ <input type="checkbox" name="status[<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>]" class="switch-input custom-control-input show-checkbox" id="<?php echo \htmlentities($key??'', ENT_QUOTES, 'UTF-8', false); ?>-checkbox" <?php echo \htmlentities((empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>>
+ <span class="switch-toggle-slider">
+ <span class="switch-on">
+ <i class="ti ti-check"></i>
+ </span>
+ <span class="switch-off">
+ <i class="ti ti-x"></i>
+ </span>
+ </span>
+ </label>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+ </div>
+
+ <div class="card">
+ <?php if(!empty($configMan->desc) || !empty($configMan->name)): ?>
+ <ul class="nav nav-tabs" id="custom-tabs-three-tab-lang" role="tablist">
+ <?php $__currentLoopData = config('app.langs'); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <li class="nav-item">
+ <a class="nav-link <?php echo \htmlentities($k == 'vi' ? 'active' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>" id="tabs-lang" data-bs-toggle="tab" data-bs-target="#tabs-lang-<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>" role="tab" aria-controls="tabs-lang-<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>" aria-selected="true"><?php echo \htmlentities($v??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </li>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </ul>
+
+ <div class="tab-content" id="custom-tabs-three-tabContent-lang">
+ <?php $__currentLoopData = config('app.langs'); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="tab-pane fade show <?php echo \htmlentities($k == 'vi' ? 'active' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>" id="tabs-lang-<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>" role="tabpanel" aria-labelledby="tabs-lang">
+ <?php if(!empty($configMan->name)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="name<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>">Tiêu đề
+ (<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>)
+ :</label>
+ <input type="text" class="form-control for-seo text-sm" name="data[name<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>]" id="name<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>" placeholder="Tiêu đề (<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>)" value="<?php echo \htmlentities(!empty(Flash::has('namevi')) ? Flash::get('namevi') : $item['name' . $k]??'', ENT_QUOTES, 'UTF-8', false); ?>" required>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->desc)): ?>
+ <div class="form-group last:!mb-0">
+ <label class="form-label" for="desc<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>">Mô tả
+ (<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>)
+ :</label>
+ <textarea class="form-control for-seo text-sm <?php echo \htmlentities(!empty($configMan->desc_cke) ? 'form-control-ckeditor' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>" name="data[desc<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>]" id="desc<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>" rows="5" placeholder="Mô tả (<?php echo \htmlentities($k??'', ENT_QUOTES, 'UTF-8', false); ?>)"><?php echo \htmlentities(!empty(Flash::has('desc' . $k)) ? Flash::get('desc' . $k) : @$item['desc' . $k]??'', ENT_QUOTES, 'UTF-8', false); ?></textarea>
+ </div>
+ <?php endif; ?>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php endif; ?>
+ <?php if(!empty($configMan->images) && empty($configMan->watermark)): ?>
+ <div class="tab-content">
+ <div class="card-flex">
+ <?php 
+ /* Photo detail */
+ $photoDetail = [];
+ $photoAction = 'photo';
+ $photoDetail['upload'] = 'photo';
+ $photoDetail['image'] = !empty($item) ? $item['photo'] : '';
+ $photoDetail['dimension'] =
+ 'Width: ' .
+ $configMan->width .
+ ' px - Height: ' .
+ $configMan->height .
+ ' px (' .
+ config('type.type_img') .
+ ')';
+ ?>
+ <?php  $this->startComponent('component.image', ['photoDetail' => $photoDetail, 'photoAction' => 'photo', 'key' => 'photo']); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+ </div>
+
+ </div>
+ </div>
+ </div>
+ </div>
+ <input type="hidden" name="id" value="<?= !empty($item['id']) && $item['id'] > 0 ? $item['id'] : '' ?>">
+ <input name="csrf_token" type="hidden" value="<?php echo \htmlentities(csrf_token()??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php  $this->startComponent('component.buttonAdd'); ?>
+ <?php echo $this->renderComponent(); ?>
+ </form>
+ </div>
+</div>
+<?php $this->stopSection(); ?>
+<?php if(!isset($__pushonce__scripts)): $__pushonce__scripts=1;  $this->startPush('scripts'); ?>
+<script src="<?php echo (isset($this->assetDict[('assets/admin/ckeditor/ckeditor.js')]))?$this->assetDict[('assets/admin/ckeditor/ckeditor.js')]:$this->baseUrl.'/'.('assets/admin/ckeditor/ckeditor.js'); ?>"></script>
+<script src="<?php echo (isset($this->assetDict[('assets/admin/ckeditor/config.js')]))?$this->assetDict[('assets/admin/ckeditor/config.js')]:$this->baseUrl.'/'.('assets/admin/ckeditor/config.js'); ?>"></script>
+<script>
+ if ($('.form-control-ckeditor').length) {
+ $('.form-control-ckeditor').each(function() {
+ var id = $(this).attr('id');
+ CKEDITOR.replace(id);
+ });
+ }
+</script>
+<?php if(!empty($configMan->images) && !empty($configMan->watermark)): ?>
+<script>
+ function imageUploader() {
+ return {
+ imageSrc: '<?php echo \htmlentities((!empty($item['photo']))?upload('photo',$item['photo']):assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>',
+ position_default:'<?php echo \htmlentities(!empty($options['position'])?$options['position']:'top-left'??'', ENT_QUOTES, 'UTF-8', false); ?>',
+ noImage:'<?php echo \htmlentities(assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>',
+ originalSrc: '<?php echo \htmlentities((!empty($item['photo']))?upload('photo',$item['photo']):assets('assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>',
+ init() {
+ this.originalSrc = this.$refs.uploadedPhoto.src;
+ this.imageSrc = this.originalSrc;
+ this.$watch('position_default', value => {
+ this.showImageSelect(this.imageSrc);
+ });
+ if(this.imageSrc !='') this.showImageSelect(this.imageSrc);
+ },
+ updateImage(event) {
+ const file = event.target.files[0];
+ if (file) {
+ this.imageSrc = URL.createObjectURL(file);
+ this.showImageSelect(this.imageSrc);
+ }
+ },
+ resetImage() {
+ this.imageSrc = this.originalSrc;
+ this.$refs.fileInput.value = '';
+ this.showImageSelect(this.originalSrc);
+ },
+ validateOpacity() {
+ if (this.opacity === '') return;
+ let value = parseInt(this.opacity);
+ if (isNaN(value)) {
+ this.opacity = '';
+ } else {
+ this.opacity = Math.max(0, Math.min(100, value));
+ }
+ },
+ showImageSelect(img){
+ if($('#' + this.position_default).length){
+ $('input[type="radio"]').next().find('img').attr('src', this.noImage);
+ $('#' + this.position_default).next().find('img').attr('src', img);
+ }
+ }
+ };
+ }
+ </script>
+<?php endif; ?>
+<?php $this->stopPush(); endif; ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

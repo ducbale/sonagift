@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+ <title>NINAPHP - File Browser</title>
+</head>
+<body>
+
+<script src="<?php echo \htmlentities(@assets('assets/ckfinder/ckfinder.js')??'', ENT_QUOTES, 'UTF-8', false); ?>"></script>
+<script>
+ CKFinder.start({
+ plugins: [
+ '<?php echo \htmlentities(@assets("assets/ckfinder/plugins/StatusBarInfo/StatusBarInfo.js")??'', ENT_QUOTES, 'UTF-8', false); ?>'
+ ],
+ onInit: function(finder) {
+ function showErrorDialog(errorMessage) {
+ finder.request( 'dialog:info', { msg: errorMessage } );
+ }
+ finder.request('files:deleted',function (event){
+ console.log(event);
+ });
+ finder.on('command:error:FileUpload', function(event) {
+ console.log(event.data.response);
+ const response = event.data.response;
+ showErrorDialog(response.error.message);
+
+ });
+ }
+ });
+</script>
+</body>
+</html>
