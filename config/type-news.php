@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  * NINA VIỆT NAM
  * Email: nina@nina.vn
@@ -24,7 +25,7 @@ return [
         'view' => true,
         'copy' => false,
         'slug' => true,
-        'status' => ["noibat" => "Nổi bật","hienthi" => "Hiển thị"],
+        'status' => ["noibat" => "Nổi bật", "hienthi" => "Hiển thị"],
         'images' => [
             'photo' => [
                 'title' => 'Ảnh đại diện',
@@ -103,7 +104,7 @@ return [
         'view' => true,
         'copy' => false,
         'slug' => true,
-        'status' => ["noibat" => "Nổi bật","hienthi" => "Hiển thị"],
+        'status' => ["noibat" => "Nổi bật", "hienthi" => "Hiển thị"],
         'images' => [
             'photo' => [
                 'title' => 'Ảnh đại diện',
@@ -122,6 +123,32 @@ return [
         'seo' => true,
         'schema' => true,
     ],
+    'Content' => [
+        'title_main' => "Content",
+        'website' => [
+            'type' => [
+                'index' => 'object',
+                'detail' => 'article'
+            ],
+            'title' => 'Content'
+        ],
+        'routes' => false,
+        'dropdown' => false,
+        'tags' => false,
+        'view' => true,
+        'copy' => false,
+        'slug' => false,
+        'status' => ["hienthi" => "Hiển thị"],
+        'show_images' => false,     // Không cần ảnh đại diện
+        'datePublish' => false,     // Không cần ngày đăng
+        'name' => true,             // Có tên tiêu đề
+        'desc' => false,            // Không cần mô tả ngắn
+        'content' => true,          // Bật nội dung
+        'content_cke' => true,      // Cho phép dùng CKEditor (soạn thảo rich-text, gắn link vào chữ được)
+        'seo' => true,              // Có thể bật SEO nếu cần
+        'schema' => false,          // Schema để false nếu không cần
+    ],
+
     'catalogue' => [
         'title_main' => "Catalogue",
         'website' => [

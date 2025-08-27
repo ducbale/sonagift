@@ -3,6 +3,7 @@
     <div>
         <div class="max-width py-3 mt-4">
             @if (!empty($rowDetail))
+
                 <div class="title-detail">
                     <h1><?= $rowDetail['name'.$lang] ?></h1>
                 </div>

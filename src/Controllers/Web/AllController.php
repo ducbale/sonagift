@@ -61,7 +61,12 @@ class AllController extends Controller
             ->whereRaw("FIND_IN_SET(?,status)", ['danhmuc'])
             ->orderBy('numb', 'asc')
             ->get();
-
+         $Contentprd = NewsModel::select('contentvi', 'numb','name'.$lang)
+            ->where('type', 'Content')
+            ->whereRaw("FIND_IN_SET(?,status)", ['hienthi'])
+            ->whereIn('numb', [3, 4])
+            ->orderBy('id', 'desc')
+            ->get();
         $listcatologue = NewsListModel::select('name'.$lang, 'photo', $this->sluglang.' as slug', 'id')
             ->where('type', 'catologue',)
             ->whereRaw("FIND_IN_SET(?,status)", ['hienthi'])
@@ -125,6 +130,7 @@ class AllController extends Controller
         $view->share(compact(
             'listcatologue',
             'listProductDm',
+            'Contentprd',
             'listBvMenu',
             'copyright',
             'video_home',

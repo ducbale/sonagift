@@ -109,6 +109,14 @@
                         data-action="buynow">
                         <span>{{ __('web.muangay') }}</span>
                     </a>
+                    <a class="transition flex-1 addcart text-decoration-none buynow"
+                        id="chatzalo"
+                        href="https://zalo.me/{{ preg_replace('/[^0-9]/', '', $optSetting['zalo']) }}"
+                        target="_blank"
+                        rel="noopener"
+                        data-action="contact">
+                        <span>Liên hệ nhận giá sỉ</span>
+                    </a>
                 </div>
                 @endif
                

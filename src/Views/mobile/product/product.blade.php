@@ -23,7 +23,7 @@
                         class="{{ Request()->sort == 4 ? 'check' : '' }}"><i></i>{{ __('web.giathapdencao') }}</a></p>
                 <input type="hidden" name="url" class="url-search" value="{{ Request()->url() }}" />
             </div>
-        </div>
+        </div>        
         <div class="flex-product-main">
             @if (!empty($listProperties) && $listProperties->isNotEmpty())
                 <div class="left-product">

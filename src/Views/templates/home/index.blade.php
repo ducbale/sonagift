@@ -37,6 +37,23 @@
             </div>
         </div>
     @endif
+    
+    {{-- đây content1  --}}
+   @foreach($Contenttext as $v)
+        <div class="wrap_newshome1">
+            <div class="wrap-seocontent">          
+                @if($v['numb'] == 1)
+                    <div class="desc_newshome text-content">
+                        {!! html_entity_decode($v['contentvi']) !!}
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
+
+
+
+    {{-- danh sách sản phẩm nổi bật --}}
     @if($proFlashsale->isNotEmpty())
         <div class="wrap_flashsale">
             <div class="wrap-content">
@@ -244,7 +261,9 @@
             </div>
         </div>
     @endif
+    {{-- bài viết  --}}
     @if($newsHome->isNotEmpty())
+
         <div class="wrap_newshome">
             <div class="wrap-content">
                 <div class="title_newshome" data-aos="fade-up" data-aos-duration="1000">
@@ -327,4 +346,17 @@
             </div>
         </div>
     @endif
+    {{-- đây content 2 --}}
+    @foreach($Contenttext as $v)
+        <div class="wrap_newshome1">
+            <div class="wrap-seocontent">          
+                @if($v['numb'] == 2)
+                    <div class="desc_newshome text-content">
+                        {!! html_entity_decode($v['contentvi']) !!}
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
+
 @endsection

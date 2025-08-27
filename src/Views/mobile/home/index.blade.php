@@ -33,6 +33,19 @@
             </div>
         </div>
     @endif
+    @foreach($Contenttext as $v)
+        <div class="wrap_quangcao">
+            <div class="wrap-content">
+                @if($v['numb'] == 1)
+                    <div class="info_quangcao">
+                        <div class="desc_quangcao text-content">
+                            {!! html_entity_decode($v['contentvi']) !!}
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
     @if($proFlashsale->isNotEmpty())
         <div class="wrap_flashsale">
             <div class="wrap-content">
@@ -318,6 +331,19 @@
             </div>
         </div>
     @endif
+     @foreach($Contenttext as $v)
+        <div class="wrap_quangcao">
+            <div class="wrap-content">
+                @if($v['numb'] == 2)
+                    <div class="info_quangcao">
+                        <div class="desc_quangcao text-content">
+                            {!! html_entity_decode($v['contentvi']) !!}
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
     <div class="wrap-nt">
         <div class="wrap-content">
             <div class="title-footer">Đăng ký nhận tin</div>

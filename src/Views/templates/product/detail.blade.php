@@ -99,7 +99,6 @@
                         </li>
                         @if (!empty($listProperties))
                             @foreach ($listProperties as $key1 => $list)
-                           
                                 @if (count($list[1]) > 0)
                                 <div class="grid-properties mb-4 align-items-center d-flex justify-content-start flex-wrap">
                                     <p class="mb-0">Mẫu:</p>

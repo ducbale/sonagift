@@ -46,7 +46,8 @@ class Seo
             $meta = (!empty($seoPage['meta']))?json_decode($seoPage['meta'], true):[];
             if (!empty($meta) && $meta['metaindex'] == 'index') $meta['metaindex'] = $meta['metaindex'] . ',follow,noodp';
             else if(empty($meta)) {
-                $meta['metaindex'] = 'index,follow,noodp';$meta['metaorder'] ='';
+                $meta['metaindex'] = 'index,follow';$meta['metaorder'] ='';
+                // ,noodp
             }
             $this->set('meta', rtrim(Arr::join([$meta['metaindex'], ($meta['metaorder']??[])], ','),','));
             $this->set('h1', $seoPage['title'.$this->lang]??'');

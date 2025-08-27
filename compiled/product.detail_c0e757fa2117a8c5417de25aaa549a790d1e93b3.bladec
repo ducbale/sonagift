@@ -101,7 +101,6 @@
  <?php if(!empty($listProperties)): ?>
  <?php $__currentLoopData = $listProperties; $this->addLoop($__currentLoopData);$this->getFirstLoop();
  foreach($__currentLoopData as $key1 => $list): $loop = $this->incrementLoopIndices();  ?>
- 
  <?php if(count($list[1]) > 0): ?>
  <div class="grid-properties mb-4 align-items-center d-flex justify-content-start flex-wrap">
  <p class="mb-0">Mẫu:</p>

@@ -6,7 +6,8 @@
 @if (config('app.site_path') != '/')
     <meta name="robots" content="noindex, nofollow">
 @else
-    <meta name="robots" content="{{ !\NINA\Core\Support\Str::isEmpty(Seo::get('meta')) ? Seo::get('meta') : 'index,follow,noodp' }}" />
+    <meta name="robots" content="{{ !\NINA\Core\Support\Str::isEmpty(Seo::get('meta')) ? Seo::get('meta') : 'index,follow' }}" />
+    {{-- ,noodp --}}
 @endif
 <link href="{{ assets_photo('photo','48x48x1',$favicon['photo'],'thumbs') }}" rel="shortcut icon" type="image/x-icon" />
 <link rel="icon" type="image/x-icon" href="{{ assets_photo('photo','48x48x1',$favicon['photo'],'thumbs') }}" />

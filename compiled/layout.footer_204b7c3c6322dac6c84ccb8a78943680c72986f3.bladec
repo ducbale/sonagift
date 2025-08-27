@@ -1,0 +1,44 @@
+<footer>
+ <div class="footer-article">
+ <div class="wrap-content flex flex-wrap items-start justify-between">
+ <div class="footer-news ">
+ <a class="logo-ft" href="">
+ <img src="<?php echo \htmlentities(assets_photo('news', config('type.static.' . $footer['type'] . '.images.photo.thumb'), $footer['photo'] ,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($footer['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ <div class="name-ft"><?php echo \htmlentities($footer['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="hotline-ft">Hotline:  <?php echo \htmlentities(Func::formatPhone($optSetting['hotline'])??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="info-footer"><?php echo Func::decodeHtmlChars($footer['content'.$lang]); ?></div>
+ </div>
+ <div class="footer-news ">
+ <div class="title-footer">Điều khoản dịch vụ</div>
+ <ul class="footer-ul p-0 m-0 list-none">
+ <?php $__currentLoopData = $policy; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <li class="last:mb-0">
+ <a class="inline-block"
+ href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>" data-aos="fade-up" data-aos-duration="1000"><?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </li>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </ul>
+ </div>
+ <div class="footer-news">
+ <ul class="social-footer flex flex-wrap justify-content-center p-0 m-0">
+ <?php $__currentLoopData = $social1; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <li class="mx-1">
+ <a href="<?php echo \htmlentities($v->link??'', ENT_QUOTES, 'UTF-8', false); ?>" target="_blank" class="block group" >
+ <img class="transition-all group-hover:animate__bounceIn"
+ src="<?php echo \htmlentities(assets_photo('photo', '', $v->photo)??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">  
+ </a>
+ </li>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </ul>
+ </div>
+ </div>
+ </div>
+ <div class="footer-powered">
+ <div class="wrap-content">
+ <div class="copyright">© Copyright <span><?php echo \htmlentities($copyright['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?></span>. All rights reserved. Design by <a href="https://nina.vn" class=" text-decoration-none" title="Nina.vn">Nina.vn</a></div> 
+ </div>
+ </div>
+</footer>
