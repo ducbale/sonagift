@@ -1534,6 +1534,18 @@ a.name-news.name1 {
 .box-readmore ul li a:hover {
 	color: #767676;
 }
+.box-readmore::-webkit-scrollbar {
+    width: 6px;
+}
+
+.box-readmore::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.box-readmore::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
 
 /* Partner */
 .info-partner {

@@ -35,7 +35,7 @@
  <div class="row">
  <?php $__currentLoopData = $news; $this->addLoop($__currentLoopData);$this->getFirstLoop();
  foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
- <div class="col-6 mb-3">
+ <div class="col-4 mb-3">
  <div class="item_tt">
  <?php  $this->startComponent('component.itemNews', ['news' => $v]); ?>
  <?php echo $this->renderComponent(); ?>

@@ -23,7 +23,30 @@
                         class="{{ Request()->sort == 4 ? 'check' : '' }}"><i></i>{{ __('web.giathapdencao') }}</a></p>
                 <input type="hidden" name="url" class="url-search" value="{{ Request()->url() }}" />
             </div>
-        </div>        
+        </div>     
+         @foreach($Contentprd as $v)
+            <div class="flex-product-main">
+                <div class="left-content"></div>
+                <div class="right-product">
+                    @if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 3)
+                        <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+                            <div class="info_nd content_down he-first" 
+                                x-bind:class="expanded ? 'heigt-auto' : ''"
+                                x-collapse.min.100px>
+                                {!! html_entity_decode($v['contentvi']) !!}
+                            </div>
+                            @if(!empty($v['contentvi']))
+                                <button type="button" @click="expanded = ! expanded"
+                                    class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+                                    <span x-text="(!expanded)?'{{ __('web.xemthem') }}':'{{ __('web.thugon') }}'" 
+                                        class="font-medium"></span>
+                                </button>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endforeach    
         <div class="flex-product-main">
             @if (!empty($listProperties) && $listProperties->isNotEmpty())
                 <div class="left-product">
@@ -64,5 +87,28 @@
                 {!! $product->appends(request()->query())->links() !!}
             </div>
         </div>
+        @foreach($Contentprd as $v)
+            <div class="flex-product-main">
+                <div class="left-content"></div>
+                <div class="right-product">
+                    @if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 4)
+                        <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+                            <div class="info_nd content_down he-first" 
+                                x-bind:class="expanded ? 'heigt-auto' : ''"
+                                x-collapse.min.100px>
+                                {!! html_entity_decode($v['contentvi']) !!}
+                            </div>
+                            @if(!empty($v['contentvi']))
+                                <button type="button" @click="expanded = ! expanded"
+                                    class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+                                    <span x-text="(!expanded)?'{{ __('web.xemthem') }}':'{{ __('web.thugon') }}'" 
+                                        class="font-medium"></span>
+                                </button>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endforeach  
     </div>
 @endsection

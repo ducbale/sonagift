@@ -3,15 +3,18 @@
     <div>
         <div class="max-width py-3 mt-4">
             @if (!empty($rowDetail))
-
                 <div class="title-detail">
                     <h1><?= $rowDetail['name'.$lang] ?></h1>
                 </div>
                 <div class="meta-toc">
                     <div class="box-readmore">
+                        <div class="toc-header">
+                            <span class="icon">☰</span>
+                            <span class="title">Nội dung chính</span>
+                        </div>
                         <ul class="toc-list" data-toc="article" data-toc-headings="h1, h2, h3"></ul>
                     </div>
-                </div>
+                </div> 
                 <div class="content-main baonoidung w-clear" id="toc-content"> {!! Func::decodeHtmlChars($rowDetail['content'.$lang]) !!}</div>
                 <div class="share">
                     <b>{{ __('web.chiase') }}:</b>
@@ -35,7 +38,7 @@
                 </div>
                 <div class="row">
                     @foreach ($news as $v)
-                    <div class="col-6 mb-3">
+                    <div class="col-4 mb-3">
                         <div class="item_tt">
                         @component('component.itemNews', ['news' => $v])
                         @endcomponent

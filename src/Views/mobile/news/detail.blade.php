@@ -34,7 +34,7 @@
                 </div>
                 <div class="row">
                     @foreach ($news as $v)
-                    <div class="col-6 mb-3">
+                    <div class="col-4 mb-3">
                         <div class="item_tt">
                         @component('component.itemNews', ['news' => $v])
                         @endcomponent

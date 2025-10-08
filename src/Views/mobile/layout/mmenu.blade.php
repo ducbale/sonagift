@@ -24,19 +24,22 @@
             <li class="menu-line"></li>
             <li><a class="@if($com == "san-pham" )  active @endif transition" href="san-pham" title="{{ __('web.sanpham') }}">{{ __('web.sanpham') }}</a>
                 <ul>
+
                     @foreach ($listProductMenu ?? [] as $vlist)
                         <li>
-                            <a class="transition " href="{{ url('slugweb', ['slug' => $vlist['slugvi']]) }}"
+                            <a class="transition " href="{{ url('slugweb', ['slug' => $vlist['slug']]) }}"
                                 title="{{ $vlist['namevi'] }}">{{ $vlist['name'.$lang] }}
                             </a>
                             @if ($vlist->getCategoryCats()->get()->isNotEmpty())
+                           
                                 <ul x-show="open" x-transition>
                                     @foreach ($vlist->getCategoryCats()->get() ?? [] as $vcat)
-                                        <li>
+                                        <li> 
                                             <a class="transition " href="{{ url('slugweb', ['slug' => $vcat['slugvi']]) }}"
                                                 title="{{ $vcat['name'.$lang] }}">{{ $vcat['name'.$lang] }}</a>
                                                 @if ($vcat->getCategoryItems()->get()->isNotEmpty())
                                                     <ul x-show="open" x-transition>
+                                                     
                                                         @foreach ($vcat->getCategoryItems()->get() ?? [] as $vitems)
                                                             <li>
                                                                 <a class="transition " href="{{ url('slugweb', ['slug' => $vitems['slugvi']]) }}"
