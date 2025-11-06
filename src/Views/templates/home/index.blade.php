@@ -191,15 +191,14 @@
         </div>
     @endif
     @if(!empty($banner_qc))
-        <div class="wrap_bannerqc" data-aos="zoom-in" data-aos-duration="1000">
-    
-                <a class="block scale-img hover_sang2" href="{{$banner_qc['link']}}">
-                    <img class="w-full"
-                        onerror="this.src='{{ thumbs('thumbs/' . config('type.photo.' . $banner_qc['type'] . '.thumb') . '/assets/images/noimage.png') }}';"
-                        src="{{ assets_photo('photo', config('type.photo.' . $banner_qc['type'] . '.thumb'), $banner_qc['photo'], 'thumbs') }}"
-                        alt="{{ $about['name'] }}">
-                </a>
-            </div>
+        <div class="wrap_bannerqc" style="padding-bottom: 60px;" data-aos="zoom-in" data-aos-duration="1000">
+            <a class="block scale-img hover_sang2 " href="{{$banner_qc['link']}}">
+                <img class="w-full"
+                    onerror="this.src='{{ thumbs('thumbs/' . config('type.photo.' . $banner_qc['type'] . '.thumb') . '/assets/images/noimage.png') }}';"
+                    src="{{ assets_photo('photo', config('type.photo.' . $banner_qc['type'] . '.thumb'), $banner_qc['photo'], 'thumbs') }}"
+                    alt="{{ $about['name'] }}">
+            </a>
+        </div>
        
     @endif
     @if($productNB->isNotEmpty())
@@ -242,7 +241,8 @@
             @endif
         @endforeach
     @endif
-    @if($doitac->isNotEmpty())
+
+    {{-- @if($doitac->isNotEmpty())
         <div class="wrap_partner">
             <div class="wrap-content">
                 <div class="title_partner" data-aos="fade-up" data-aos-duration="1000">
@@ -256,6 +256,27 @@
                                 src="{{ assets_photo('photo', config('type.photo.' . $v['type'] . '.thumb'), $v['photo'], 'thumbs') }}"
                                 alt="{{ $about['name'] }}">
                         </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif --}}
+    @if($doitac->isNotEmpty())
+        <div class="wrap_partner">
+            <div class="wrap-content">
+                <div class="title_partner" data-aos="fade-up" data-aos-duration="1000">
+                    <h2>200+ doanh nghiệp đã sử dụng</h2>
+                </div>
+                <div class="slick_partnerlp">
+                    @foreach($doitac as $k => $v)
+                        <div>
+                            <a class="block items_partner" href="{{$v['link']}}" data-aos="fade-up" data-aos-duration="1000">
+                                <img class=""
+                                    onerror="this.src='{{ thumbs('thumbs/' . config('type.photo.' . $v['type'] . '.thumb') . '/assets/images/noimage.png') }}';"
+                                    src="{{ assets_photo('photo', config('type.photo.' . $v['type'] . '.thumb'), $v['photo'], 'thumbs') }}"
+                                    alt="{{ $about['name'] }}">
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -348,15 +369,26 @@
     @endif
     {{-- đây content 2 --}}
     @foreach($Contenttext as $v)
-        <div class="wrap_newshome1">
-            <div class="wrap-seocontent">          
-                @if($v['numb'] == 2)
-                    <div class="desc_newshome text-content">
+        @if($v['numb'] == 2)
+            <div class="wrap_newshome1" >
+                <div class="wrap-seocontent" x-data="{ expanded: false }">          
+
+                    <div class="info_nd content_down he-first transition-all duration-500 ease-in-out"
+                         x-bind:class="expanded ? 'heigt-auto' : ''"
+                                x-collapse.min.100px>
                         {!! html_entity_decode($v['contentvi']) !!}
                     </div>
-                @endif
-            </div>
-        </div>
-    @endforeach
 
+                    @if(!empty($v['contentvi']))
+                        <button type="button" 
+                            @click="expanded = !expanded"
+                            class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+                            <span x-text="!expanded ? '{{ __('web.xemthem') }}' : '{{ __('web.thugon') }}'" 
+                                class="font-medium"></span>
+                        </button>
+                    @endif
+                </div>
+            </div>
+        @endif
+    @endforeach
 @endsection

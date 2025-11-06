@@ -199,9 +199,8 @@
  </div>
  <?php endif; ?>
  <?php if(!empty($banner_qc)): ?>
- <div class="wrap_bannerqc" data-aos="zoom-in" data-aos-duration="1000">
- 
- <a class="block scale-img hover_sang2" href="<?php echo \htmlentities($banner_qc['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="wrap_bannerqc" style="padding-bottom: 60px;" data-aos="zoom-in" data-aos-duration="1000">
+ <a class="block scale-img hover_sang2 " href="<?php echo \htmlentities($banner_qc['link']??'', ENT_QUOTES, 'UTF-8', false); ?>">
  <img class="w-full"
  onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $banner_qc['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
  src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $banner_qc['type'] . '.thumb'), $banner_qc['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
@@ -253,7 +252,8 @@
  <?php endif; ?>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  <?php endif; ?>
- <?php if($doitac->isNotEmpty()): ?>
+
+ <?php /* <?php if($doitac->isNotEmpty()): ?>
  <div class="wrap_partner">
  <div class="wrap-content">
  <div class="title_partner" data-aos="fade-up" data-aos-duration="1000">
@@ -268,6 +268,28 @@
  src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $v['type'] . '.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
  alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
  </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+ <?php endif; ?>*/ ?>
+ <?php if($doitac->isNotEmpty()): ?>
+ <div class="wrap_partner">
+ <div class="wrap-content">
+ <div class="title_partner" data-aos="fade-up" data-aos-duration="1000">
+ <h2>200+ doanh nghiệp đã sử dụng</h2>
+ </div>
+ <div class="slick_partnerlp">
+ <?php $__currentLoopData = $doitac; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <div>
+ <a class="block items_partner" href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>" data-aos="fade-up" data-aos-duration="1000">
+ <img class=""
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $v['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $v['type'] . '.thumb'), $v['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ </div>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </div>
  </div>
@@ -346,35 +368,58 @@
  </div>
  <?php endif; ?>
  <?php if(!empty($video_home)): ?>
- <div class="wrap_videohome">
- <div class="" data-aos="zoom-in" data-aos-duration="1000">
- <a class="block pic_videohome" data-fancybox="video-gallery" href="<?php echo \htmlentities(Func::get_youtube_shorts($video_home['link'])??'', ENT_QUOTES, 'UTF-8', false); ?>" title="<?php echo \htmlentities($video_home['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="wrap_videohome" data-aos="zoom-in" data-aos-duration="1000">
+ <div class="video-container" id="videoContainer">
+ <div class="video-thumbnail" onclick="playVideo('<?php echo \htmlentities(Func::get_youtube_shorts($video_home['link'])??'', ENT_QUOTES, 'UTF-8', false); ?>')">
  <img class="w-full"
  onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/' . config('type.photo.' . $video_home['type'] . '.thumb') . '/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
  src="<?php echo \htmlentities(assets_photo('photo', config('type.photo.' . $video_home['type'] . '.thumb'), $video_home['photo'], 'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>"
  alt="<?php echo \htmlentities($about['name']??'', ENT_QUOTES, 'UTF-8', false); ?>">
- <?php if(!empty($video_home['link'])): ?> 
  <div class="buttun-play"></div>
- <?php endif; ?>
- </a>
  </div>
  </div>
+ </div>
+
+ <script>
+ function playVideo(url) {
+ const container = document.getElementById('videoContainer');
+ container.innerHTML = `
+ <iframe width="100%" height="480" 
+ src="${url}?autoplay=1&rel=0"
+ title="Video" frameborder="0" 
+ allow="autoplay; encrypted-media" allowfullscreen>
+ </iframe>
+ `;
+ }
+ </script>
  <?php endif; ?>
+
  <?php /* đây content 2 */ ?>
  <?php $__currentLoopData = $Contenttext; $this->addLoop($__currentLoopData);$this->getFirstLoop();
  foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
- <div class="wrap_newshome1">
- <div class="wrap-seocontent">          
  <?php if($v['numb'] == 2): ?>
- <div class="desc_newshome text-content">
+ <div class="wrap_newshome1" >
+ <div class="wrap-seocontent" x-data="{ expanded: false }">          
+
+ <div class="info_nd content_down he-first transition-all duration-500 ease-in-out"
+ x-bind:class="expanded ? 'heigt-auto' : ''"
+ x-collapse.min.100px>
  <?php echo html_entity_decode($v['contentvi']); ?>
 
  </div>
+
+ <?php if(!empty($v['contentvi'])): ?>
+ <button type="button" 
+ @click="expanded = !expanded"
+ class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+ <span x-text="!expanded ? '<?php echo \htmlentities(__('web.xemthem')??'', ENT_QUOTES, 'UTF-8', false); ?>' : '<?php echo \htmlentities(__('web.thugon')??'', ENT_QUOTES, 'UTF-8', false); ?>'" 
+ class="font-medium"></span>
+ </button>
  <?php endif; ?>
  </div>
  </div>
+ <?php endif; ?>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
-
 <?php $this->stopSection(); ?>
 
 <?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

@@ -813,6 +813,19 @@ NN_FRAMEWORK.slickPage = function () {
             arrows: false,
         });
     }
+	if (isExist($(".slick_partnerlp"))) {
+        $(".slick_partnerlp").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 100,
+            slidesToShow: 6,
+            slidesToScroll: 2,
+			rows: 3,
+            adaptiveHeight: true,
+            autoplay: true,
+            arrows: false,
+        });
+    }
 	$('.name-maps').click(function(event) {
         $('.name-maps').removeClass("active");
         $(this).addClass("active");
