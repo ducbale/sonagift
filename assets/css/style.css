@@ -3055,6 +3055,33 @@ margin-top:50px;
 }
 .wrap_videohome{}
 .pic_videohome{position: relative;}
+.video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.video-container {
+    position: relative;
+    width: 80%; /* bạn có thể đổi thành 70% nếu muốn nhỏ hơn */
+    padding-bottom: 45%; /* 16:9 = 56.25%, 21:9 thì 42.85% */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 .buttun-play:after{
 	content:'';
 	position: absolute;

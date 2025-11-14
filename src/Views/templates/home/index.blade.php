@@ -353,20 +353,23 @@
         </div>
     @endif
     @if(!empty($video_home))
-        <div class="wrap_videohome">
-            <div class="" data-aos="zoom-in" data-aos-duration="1000">
-                <a class="block pic_videohome" data-fancybox="video-gallery" href="{{ Func::get_youtube_shorts($video_home['link']) }}" title="{{$video_home['name']}}">
-                    <img class="w-full"
-                        onerror="this.src='{{ thumbs('thumbs/' . config('type.photo.' . $video_home['type'] . '.thumb') . '/assets/images/noimage.png') }}';"
-                        src="{{ assets_photo('photo', config('type.photo.' . $video_home['type'] . '.thumb'), $video_home['photo'], 'thumbs') }}"
-                        alt="{{ $about['name'] }}">
-                        @if(!empty($video_home['link'])) 
-                            <div class="buttun-play"></div>
-                        @endif
-                </a>
-            </div>
+        <div class="wrap_videohome" data-aos="zoom-in" data-aos-duration="1000">
+            @if(!empty($video_home['link']))
+                <div class="video-wrapper">
+                    <div class="video-container">
+                        <iframe 
+                            src="{{ str_replace('watch?v=', 'embed/', Func::get_youtube_shorts($video_home['link'])) }}?rel=0&showinfo=0"
+                            title="{{ $video_home['name'] }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            @endif
         </div>
     @endif
+
     {{-- đây content 2 --}}
     @foreach($Contenttext as $v)
         @if($v['numb'] == 2)
