@@ -1366,6 +1366,7 @@ a.cart-header span {
 	margin-bottom: 1.5rem;
 	position: relative;
 }
+
 .title-main span {
 	font-size: 1.5em;
 	font-weight: bold;
@@ -3196,6 +3197,92 @@ margin-top:50px;
 .wrap_newshome1 .wrap-content{
 	padding: 50px 0;
 }
+/* ------------------------------------- */
+.home-news {
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+    }
+
+    .newsletter-card {
+        max-width: 580px;
+        width: 100%;
+        padding: 20px 30px 25px;
+        border-radius: 24px;
+        text-align: center;
+        color: #fff;
+        /* nền đỏ, nếu có pattern riêng bạn thay url(...) của bạn vào */
+        background-color: #FEF8EF;
+        background-size: cover;
+        background-repeat: repeat;
+    }
+
+    .newsletter-subtitle {
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+		color: #000;
+        margin-bottom: 16px;
+    }
+
+    .newsletter-title {
+        font-size: 20px;
+        line-height: 1.4;
+        text-transform: uppercase;
+		color: #000;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .newsletter-desc {
+        font-size: 15px;
+		color: #000;
+        margin-bottom: 28px;
+    }
+
+    .newsletter-input {
+        margin-bottom: 22px;
+    }
+
+    .newsletter-email-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #f7d3c4;
+        padding: 10px 4px;
+        font-size: 15px;
+        color: #0a0202;
+        outline: none;
+    }
+
+    .newsletter-email-input::placeholder {
+        color: #f7d3c4;
+    }
+
+    .newsletter-email-input:focus {
+        border-color: #f7d3c4;
+    }
+
+    .newsletter-button {
+        margin-top: 10px;
+    }
+
+    .newsletter-button input[type="submit"] {
+        display: inline-block;
+        padding: 10px 45px;
+        border-radius: 999px;
+        border: none;
+        background: #ffcc06;
+        color: #090101;
+        font-weight: 600;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .newsletter-button input[type="submit"]:hover {
+        opacity: .9;
+    }
+/* ---------------------- */
 .slick-baiviet{height: 436px;overflow: hidden;}
 .title_newshome1{
     text-align: center;

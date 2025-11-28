@@ -37,22 +37,20 @@
             </div>
         </div>
     @endif
-    
     {{-- đây content1  --}}
-   @foreach($Contenttext as $v)
-        <div class="wrap_newshome1">
-            <div class="wrap-seocontent">          
-                @if($v['numb'] == 1)
-                    <div class="desc_newshome text-content">
-                        {!! html_entity_decode($v['contentvi']) !!}
-                    </div>
-                @endif
+    @foreach($Contenttext as $v)
+        @if($v['numb'] == 1)
+            <div class="wrap_newshome1">
+                <div class="wrap-seocontent">          
+                    
+                        <div class="desc_newshome text-content">
+                            {!! html_entity_decode($v['contentvi']) !!}
+                        </div>
+                
+                </div>
             </div>
-        </div>
+        @endif
     @endforeach
-
-
-
     {{-- danh sách sản phẩm nổi bật --}}
     @if($proFlashsale->isNotEmpty())
         <div class="wrap_flashsale">
@@ -180,16 +178,62 @@
                                 src="{{ assets_photo('photo', config('type.photo.'.$v['type'].'.thumb'), $v['photo'], 'thumbs') }}" alt="{{ $v['name'.$lang] }}">
                             </a>
                         </div>
-                        <div class="info_quangcao">
-                            <h3 class="name_quangcao">{{ $v['name' . $lang] }}</h3>
-                            <div class="desc_quangcao text-split">{{$v['desc' . $lang]}}</div>
-                            <a class="btn_quangcao" href="{{$v['link'] }}" >Mua ngay</a>
-                        </div>
+                         @if ($loop->last)
+                            <div class="info_quangcao">
+                                <div class="home-news">
+                                    <div class="newsletter-card" data-aos="fade-up" data-aos-duration="1000">
+                                        <p class="newsletter-title">ĐĂNG KÝ NHẬN TƯ VẤN MIỄN PHÍ</p>
+
+                                        <p class="newsletter-desc">
+                                            Nhập thông tin để nhận tư vấn miễn phí từ SonaGift
+                                        </p>
+
+                                        <form method="POST" action="{{ url('letter') }}" enctype="multipart/form-data">
+                                            @csrf
+
+                                            <div class="newsletter-input">
+                                                <input type="text" name="fullname" class="newsletter-email-input"
+                                                    placeholder="Họ tên của bạn" required>
+                                            </div>
+
+                                            <div class="newsletter-input">
+                                                <input type="tel" name="phone" class="newsletter-email-input"
+                                                    placeholder="Số điện thoại" required>
+                                            </div>
+
+                                            <div class="newsletter-input">
+                                                <textarea name="content" class="newsletter-email-input textarea-style"
+                                                        placeholder="Mô tả yêu cầu" required></textarea>
+                                            </div>
+
+                                            <div class="newsletter-button">
+                                                <input type="submit" value="ĐĂNG KÝ NGAY">
+                                            </div>
+
+                                            {{-- hidden backend --}}
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="recaptcha_response_newsletter" id="recaptchaResponseNewsletter">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{-- Các quảng cáo khác → dùng info_quangcao bình thường --}}
+                        @else
+                            <div class="info_quangcao">
+                                <h3 class="name_quangcao">{{ $v['name'.$lang] }}</h3>
+                                <div class="desc_quangcao text-split">{{ $v['desc'.$lang] }}</div>
+                                <a class="btn_quangcao" href="{{ $v['link'] }}">Mua ngay</a>
+                            </div>
+                        @endif  
                     </div>
                 @endforeach
             </div>
         </div>
     @endif
+   
+
+
     @if(!empty($banner_qc))
         <div class="wrap_bannerqc" style="padding-bottom: 60px;" data-aos="zoom-in" data-aos-duration="1000">
             <a class="block scale-img hover_sang2 " href="{{$banner_qc['link']}}">
@@ -371,7 +415,8 @@
     @endif
 
     {{-- đây content 2 --}}
-    @foreach($Contenttext as $v)
+    <div class ="hidden">
+        @foreach($Contenttext as $v)
         @if($v['numb'] == 2)
             <div class="wrap_newshome1" >
                 <div class="wrap-seocontent" x-data="{ expanded: false }">          
@@ -394,4 +439,6 @@
             </div>
         @endif
     @endforeach
+    </div>
+    
 @endsection
