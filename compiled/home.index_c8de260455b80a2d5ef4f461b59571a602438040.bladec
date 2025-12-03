@@ -38,12 +38,21 @@
  foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
  <div class="wrap_quangcao">
  <div class="wrap-content">
- <?php if($v['numb'] == 1): ?>
- <div class="info_quangcao">
- <div class="desc_quangcao text-content">
+ <?php if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 1): ?>
+ <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+ <div class="info_nd content_down he-first" 
+ x-bind:class="expanded ? 'heigt-auto' : ''"
+ x-collapse.min.100px>
  <?php echo html_entity_decode($v['contentvi']); ?>
 
  </div>
+ <?php if(!empty($v['contentvi'])): ?>
+ <button type="button" @click="expanded = ! expanded"
+ class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+ <span x-text="(!expanded)?'<?php echo \htmlentities(__('web.xemthem')??'', ENT_QUOTES, 'UTF-8', false); ?>':'<?php echo \htmlentities(__('web.thugon')??'', ENT_QUOTES, 'UTF-8', false); ?>'" 
+ class="font-medium"></span>
+ </button>
+ <?php endif; ?>
  </div>
  <?php endif; ?>
  </div>
@@ -75,13 +84,15 @@
  <a class="scale-img" href="<?php echo \htmlentities(url('slugweb', ['slug' => $v['slug']])??'', ENT_QUOTES, 'UTF-8', false); ?>"
  title="<?php echo \htmlentities($v['name' . $lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
  <div class="<?php if($v['photo2']): ?> pic1 <?php endif; ?>">
- <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
- src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img class="owl-lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ loading="lazy">
  </div>
  <?php if($v['photo2']): ?>
  <div class="pic2">
- <img class="lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
- data-src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo2'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img class="owl-lazy" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/'.config('type.product.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';"
+ data-src="<?php echo \htmlentities(assets_photo('product', config('type.product.'.$v['type'].'.images.photo.thumb'), $v['photo2'], 'watermarks')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ loading="lazy">
  </div>
  <?php endif; ?>
  </a>
@@ -275,7 +286,7 @@
  <div data-aos="fade-up" data-aos-duration="1000">
  <div class="owl-page owl-carousel owl-theme"
  data-items="screen:0|items:1|margin:10"
- data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="1" data-mousedrag="1"
  data-touchdrag="1" data-smartspeed="800" data-autoplayspeed="800" data-autoplaytimeout="5000"
  data-dots="0" data-animations="" data-nav="0" data-navcontainer="">
  <?php $__currentLoopData = $newsHome; $this->addLoop($__currentLoopData);$this->getFirstLoop();
@@ -349,12 +360,21 @@
  foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
  <div class="wrap_quangcao">
  <div class="wrap-content">
- <?php if($v['numb'] == 2): ?>
- <div class="info_quangcao">
- <div class="desc_quangcao text-content">
+ <?php if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 2): ?>
+ <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+ <div class="info_nd content_down he-first" 
+ x-bind:class="expanded ? 'heigt-auto' : ''"
+ x-collapse.min.100px>
  <?php echo html_entity_decode($v['contentvi']); ?>
 
  </div>
+ <?php if(!empty($v['contentvi'])): ?>
+ <button type="button" @click="expanded = ! expanded"
+ class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+ <span x-text="(!expanded)?'<?php echo \htmlentities(__('web.xemthem')??'', ENT_QUOTES, 'UTF-8', false); ?>':'<?php echo \htmlentities(__('web.thugon')??'', ENT_QUOTES, 'UTF-8', false); ?>'" 
+ class="font-medium"></span>
+ </button>
+ <?php endif; ?>
  </div>
  <?php endif; ?>
  </div>
@@ -386,8 +406,6 @@
  </form>
  </div>
  </div>
- 
-
 <?php $this->stopSection(); ?>
 
 <?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

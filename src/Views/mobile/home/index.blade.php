@@ -36,11 +36,20 @@
     @foreach($Contenttext as $v)
         <div class="wrap_quangcao">
             <div class="wrap-content">
-                @if($v['numb'] == 1)
-                    <div class="info_quangcao">
-                        <div class="desc_quangcao text-content">
+               @if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 1)
+                    <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+                        <div class="info_nd content_down he-first" 
+                            x-bind:class="expanded ? 'heigt-auto' : ''"
+                            x-collapse.min.100px>
                             {!! html_entity_decode($v['contentvi']) !!}
                         </div>
+                        @if(!empty($v['contentvi']))
+                            <button type="button" @click="expanded = ! expanded"
+                                class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+                                <span x-text="(!expanded)?'{{ __('web.xemthem') }}':'{{ __('web.thugon') }}'" 
+                                    class="font-medium"></span>
+                            </button>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -268,20 +277,20 @@
                     data-dots="0" data-animations="" data-nav="0" data-navcontainer="">
                         @foreach ($newsHome as $v)
                             <div class="item_newshome">
-                            <div class="pic_newshome">
-                                    <a class="" href="{{ url('slugweb', ['slug' => $v['slug']]) }}"
-                                        title="{{ $v['name' . $lang] }}">
-                                        <img onerror="this.src='{{ thumbs('thumbs/'.config('type.news.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png') }}';"
-                                        src="{{ assets_photo('news', config('type.news.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'thumbs') }}" alt="{{ $v['name'.$lang] }}">
-                                    </a>
-                            </div>
-                            <div class="info_newshome">
-                                    <h3 class="name_newshome">
-                                        <a class="text-split" href="{{ url('slugweb', ['slug' => $v['slug']]) }}" title="{{ $v['name' . $lang] }}">{{ $v['name' . $lang] }}</a>
-                                    </h3>
-                                    <span>{{ __('web.ngaydang') }}: {{ \Carbon\Carbon::parse($v->created_at)->format('d/m/Y') }}</span>
-                                    <div class="desc_newshome text-split">{{$v['desc'.$lang]}}</div>
-                            </div>
+                                <div class="pic_newshome">
+                                        <a class="" href="{{ url('slugweb', ['slug' => $v['slug']]) }}"
+                                            title="{{ $v['name' . $lang] }}">
+                                            <img onerror="this.src='{{ thumbs('thumbs/'.config('type.news.'.$v['type'].'.images.photo.thumb').'/assets/images/noimage.png') }}';"
+                                            src="{{ assets_photo('news', config('type.news.'.$v['type'].'.images.photo.thumb'), $v['photo'], 'thumbs') }}" alt="{{ $v['name'.$lang] }}">
+                                        </a>
+                                </div>
+                                <div class="info_newshome">
+                                        <h3 class="name_newshome">
+                                            <a class="text-split" href="{{ url('slugweb', ['slug' => $v['slug']]) }}" title="{{ $v['name' . $lang] }}">{{ $v['name' . $lang] }}</a>
+                                        </h3>
+                                        <span>{{ __('web.ngaydang') }}: {{ \Carbon\Carbon::parse($v->created_at)->format('d/m/Y') }}</span>
+                                        <div class="desc_newshome text-split">{{$v['desc'.$lang]}}</div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -334,11 +343,20 @@
      @foreach($Contenttext as $v)
         <div class="wrap_quangcao">
             <div class="wrap-content">
-                @if($v['numb'] == 2)
-                    <div class="info_quangcao">
-                        <div class="desc_quangcao text-content">
+               @if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 2)
+                    <div class="baonoidung chitietsanpham mt-4" x-data="{ expanded: false }">
+                        <div class="info_nd content_down he-first" 
+                            x-bind:class="expanded ? 'heigt-auto' : ''"
+                            x-collapse.min.100px>
                             {!! html_entity_decode($v['contentvi']) !!}
                         </div>
+                        @if(!empty($v['contentvi']))
+                            <button type="button" @click="expanded = ! expanded"
+                                class="mx-auto block active:!bg-[#5172fd] active:!border-[#5172fd] active:!text-white mt-4 mb-4 !border-[1px] border-solid border-gray-400 bg-white text-black !shadow-none !ring-0 !outline-none rounded-[50px] px-[15px] py-[7px]">
+                                <span x-text="(!expanded)?'{{ __('web.xemthem') }}':'{{ __('web.thugon') }}'" 
+                                    class="font-medium"></span>
+                            </button>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -370,6 +388,4 @@
             </form>
         </div>
     </div>
-        
-
 @endsection
