@@ -340,7 +340,7 @@
             </div>
         </div>
     @endif
-     @foreach($Contenttext as $v)
+    @foreach($Contenttext as $v)
         <div class="wrap_quangcao">
             <div class="wrap-content">
                @if(mb_strtolower($v['namevi'] ?? '') == mb_strtolower($titleMain ?? '') && $v['numb'] == 2)
